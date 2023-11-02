@@ -1,6 +1,6 @@
 # Aineopintojen harjoitustyö: ohjelmistotekniikka
 
-Tämä on repositorio kurssille **Ohjelmistotekniikka TKT20018.** foo = bar 
+Tämä on repositorio kurssille **Ohjelmistotekniikka TKT20018.**
 
 ## Tehtävät
 
