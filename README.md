@@ -2,7 +2,13 @@
 
 Tämä on repositorio kurssille **Ohjelmistotekniikka TKT20018.**
 
-## Tehtävät
+## Harjoitustyö
+
+[Määrittelydokumentti](https://github.com/valttteri/Tiralabra/blob/main/documents/specification_document.md)
+
+[Tuntikirjanpito](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
+
+## Laskarit
 
 ### Viikko 1
 
