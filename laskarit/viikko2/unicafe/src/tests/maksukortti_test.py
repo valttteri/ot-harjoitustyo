@@ -29,3 +29,7 @@ class TestMaksukortti(unittest.TestCase):
     def test_ota_rahaa_palauttaa_oikean_totuusarvon(self):
         self.assertTrue(self.maksukortti.ota_rahaa(600))
         self.assertFalse(self.maksukortti.ota_rahaa(1100))
+    
+    def test_kortin_tiedot_tulostetaan_oikein(self):
+        teksti = f"Kortilla on rahaa {self.maksukortti.saldo_euroina():0.2f} euroa"
+        self.assertEqual(str(self.maksukortti), teksti)
