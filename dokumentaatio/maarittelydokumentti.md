@@ -1,27 +1,35 @@
 # Määrittelydokumentti
 
 ### Sovelluksen tarkoitus
-Projektin aihe on opintojen seurantajärjestelmä. Sovellus tarjoaa käyttäjälle tapoja suunnitella opintojaan ja seurata niiden etenemistä.
+Projektin aihe on matopeli. Pelissä ohjataan matoa pitkin pelialuetta. Pelialueelle ilmestyy "ruokaa", jota keräämällä mato kasvaa pidemmäksi.
+Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päättyy, kun tietty pistemäärä saavutetaan tai mato törmää seinään tai itseensä.
 
 ### Perusversion toiminnallisuudet
-- Sovelluksessa on kolme näkymää
-  - Etusivu
-  - Omat kurssit
-  - Periodit
-- Etusivulla näkyy suoritettujen kurssien ja opintopisteiden määrä
-- Etusivulla on valikko, jonka kautta voi siirtyä sovelluksen muihin näkymiin
-- Käyttäjä voi lisätä uuden opintokokonaisuuden sovellukseen
-- Opintokokonaisuus sisältää kursseja
-- Käyttäjä voi merkitä kurssin suoritetuksi
-- Periodit-sivulla näkyy meneillään olevan ja tulevien vuosien opetusperiodit
-- Kursseja voi ajoittaa periodeihin
+- Aloitusnäyttö
+  - Pelin käynnistyessä avautuu aloitusnäyttö
+  - Aloitusnäytöltä voi aloittaa uuden pelin, tarkastella huipputuloksia tai sulkea ohjelman
+- Pelaaminen
+  - Pelaaja voi ohjata matoa nuolinäppäimillä
+  - Pelialueella on "ruokaa", jota pelaaja kerää
+  - Mato pitenee aina kun sille syöttää ruokaa
+  - Peli päättyy voittoon, jos madosta tulee riittävän pitkä
+  - Peli päättyy häviöön, jos mato törmää seinään tai itseensä
+  - Kun peli päättyy, pelaaja voi tallentaa omat pisteensä huipputuloksiin
+- Taukonäyttö
+  - Käynnissä olevan pelin voi laittaa tauolle
+  - Taukonäytöltä voi poistua pelistä, aloittaa uuden pelin tai jatkaa meneillään olevaa peliä
 
 ### Jatkokehitysideoita
-Jos perusversio valmistuu hyvissä ajoin, sovellukseen voi lisätä seuraavaksi listattuja asioita.
+Perusversion valmistuttua peliin voi lisätä seuraavia ominaisuuksia
 
-- Kalenteri, johon voi lisätä tapahtumia. Tällaisia ovat esim. luennot, deadlinet ja laskarit
-- Sovelluksen etusivulla näkyy, mitä tapahtumia on merkitty meneillään olevalle päivälle
-- Sovelluksen etusivulta pääsee tarkastelemaan kalenteria
+- Muita keräiltäviä asioita
+  - Parempi ruoka joka pidentää matoa tavallista enemmän
+  - Myrkyllinen ruoka, joka lyhentää matoa
+  - Ruoka, joka antaa madolle hetkeksi aikaa erityisen kyvyn, kuten kyvyn mennä oman ruumiinsa läpi kuolematta
+- Uusia tasoja, joihin voi luoda haastetta esimerkiksi seinien ja muiden esteiden avulla.
+- Eri vaikeustasoja
+- Kaksinpeli, jossa voi pelata toista ihmistä vastaan
+ 
 
 
 
