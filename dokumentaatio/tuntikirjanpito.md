@@ -2,6 +2,6 @@
 
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
-| 8.11. | 2h   | projektin suunnittelu, määrittelydokumentin kirjoittaminen |
-| x.11. | x    | todo |
-| yht.  | 2h   |
+| 8.11. | 2h   | projektin suunnittelu, määrittelydokumentti |
+| 9.11. | 2h   | projektin suunnittelu, määrittelydokumentti |
+| yht.  | 4h   |
