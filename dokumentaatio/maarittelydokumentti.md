@@ -18,6 +18,8 @@ Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päät
 - Taukonäyttö
   - Käynnissä olevan pelin voi laittaa tauolle
   - Taukonäytöltä voi poistua pelistä, aloittaa uuden pelin tai jatkaa meneillään olevaa peliä
+- Huipputulokset
+  - Sivu, jolle on listattu pelissä saavutetut pisteet parhausjärjestyksessä
 
 ### Jatkokehitysideoita
 Perusversion valmistuttua peliin voi lisätä seuraavia ominaisuuksia
@@ -26,7 +28,8 @@ Perusversion valmistuttua peliin voi lisätä seuraavia ominaisuuksia
   - Parempi ruoka joka pidentää matoa tavallista enemmän
   - Myrkyllinen ruoka, joka lyhentää matoa
   - Ruoka, joka antaa madolle hetkeksi aikaa erityisen kyvyn, kuten kyvyn mennä oman ruumiinsa läpi kuolematta
-- Uusia tasoja, joihin voi luoda haastetta esimerkiksi seinien ja muiden esteiden avulla.
+- Uusia pelialueita, joihin voi luoda haastetta esimerkiksi seinien ja muiden esteiden avulla.
+- Näkymä, jossa voi valita haluamansa pelialueen
 - Eri vaikeustasoja
 - Kaksinpeli, jossa voi pelata toista ihmistä vastaan
  
