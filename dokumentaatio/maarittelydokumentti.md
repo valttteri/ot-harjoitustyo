@@ -27,7 +27,7 @@ Perusversion valmistuttua peliin voi lisätä seuraavia ominaisuuksia
 - Muita keräiltäviä asioita
   - Parempi ruoka joka pidentää matoa tavallista enemmän
   - Myrkyllinen ruoka, joka lyhentää matoa
-  - Ruoka, joka antaa madolle hetkeksi aikaa erityisen kyvyn, kuten kyvyn mennä oman ruumiinsa läpi kuolematta
+  - Ruoka, joka antaa madolle hetkeksi erityisen kyvyn, kuten oman ruumiin läpi kulkemisen kuolematta
 - Uusia pelialueita, joihin voi luoda haastetta esimerkiksi seinien ja muiden esteiden avulla.
 - Näkymä, jossa voi valita haluamansa pelialueen
 - Eri vaikeustasoja
