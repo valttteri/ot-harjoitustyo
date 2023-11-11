@@ -4,4 +4,5 @@
 | :----:|:-----| :-----|
 | 8.11. | 2h   | projektin suunnittelu, määrittelydokumentti |
 | 9.11. | 2h   | projektin suunnittelu, määrittelydokumentti |
-| yht.  | 4h   |
+| 11.11. | 3h   | projektikansio luotu, pygamen opetteleminen |
+| yht.  | 7h   |
