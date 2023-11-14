@@ -4,7 +4,7 @@ Tämä on repositorio kurssille **Ohjelmistotekniikka TKT20018.**
 
 ## Harjoitustyö
 
-[Määrittelydokumentti](https://github.com/valttteri/Tiralabra/blob/main/documents/specification_document.md)
+[Määrittelydokumentti](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/maarittelydokumentti.md)
 
 [Tuntikirjanpito](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
 
