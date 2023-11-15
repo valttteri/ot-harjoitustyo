@@ -1,40 +1,49 @@
 import pygame
 from pygame.math import Vector2
-import os
 
 pygame.init()
 
 class Snake(pygame.sprite.Sprite):
-    def __init__(self, head_x:int, head_y:int, cell_size:int, width:int, height:int):
+    def __init__(self, head_x:int, head_y:int, cell_size:int, width:int, height:int, display):
         super().__init__()
-        self.body = [Vector2(head_x, head_y), Vector2(10, head_y+1), Vector2(10, head_y+2)]
-        self.direction = Vector2(0, -1)
+        self.cell_size = cell_size
+        self.direction_x = 0
+        self.direction_y = -1
+        self.display = display
         self.width = width
         self.height = height
-        self.max_x_pos = cell_size * width
-        self.max_y_pos = cell_size * height
+        self.max_x_pos = self.cell_size * width
+        self.max_y_pos = self.cell_size * height
         self.grow = False
+
+        self.body = [
+                pygame.Rect(head_x * self.cell_size, head_y * self.cell_size, self.cell_size, self.cell_size),
+                pygame.Rect(head_x * self.cell_size, (head_y + 1) * self.cell_size, self.cell_size, self.cell_size),
+                pygame.Rect(head_x * self.cell_size, (head_y + 2) * self.cell_size, self.cell_size, self.cell_size)
+            ]
     
     def plot_snake(self):
         for part in self.body:
-            x_pos = int(part.x * cell_size)
-            y_pos = int(part.y * cell_size)
-            part_rect = pygame.Rect(x_pos, y_pos, cell_size, cell_size)
-            pygame.draw.rect(display, (0, 0, 255), part_rect)
-    
-    def move_snake(self):
-        new_head = Vector2(self.body[0].x, self.body[0].y) + self.direction
-        if new_head.x < 0:
-            new_head = Vector2(self.width, self.body[0].y) + self.direction
-        if new_head.x >= self.width:
-            new_head = Vector2(-1, self.body[0].y) + self.direction
+            pygame.draw.rect(self.display, (0, 0, 255), part)
 
-        if new_head.y < 0:
-            new_head = Vector2(self.body[0].x, self.height) + self.direction
-        if new_head.y >= self.height:
-            new_head = Vector2(self.body[0].x, -1) + self.direction
+    def move_snake(self):
+        new_head = pygame.Rect(self.body[0].x, self.body[0].y, self.cell_size, self.cell_size)
+        new_head.move_ip(self.cell_size * self.direction_x, self.cell_size * self.direction_y)
+        #if new_head.x < 0:
+        #    new_head = Vector2(self.width, self.body[0].y) + self.direction
+        #if new_head.x >= self.width:
+        #    new_head = Vector2(-1, self.body[0].y) + self.direction
+#
+        #if new_head.y < 0:
+        #    new_head = Vector2(self.body[0].x, self.height) + self.direction
+        #if new_head.y >= self.height:
+        #    new_head = Vector2(self.body[0].x, -1) + self.direction
 
         self.body.insert(0, new_head)
+
+        if self.snake_hits_itself():
+            print("game over")
+
         if self.grow:
             self.grow = False
         else:
@@ -42,64 +51,78 @@ class Snake(pygame.sprite.Sprite):
     
     def change_direction(self, direction:str):
         if direction == 'up':
-            if self.direction == Vector2(0, 1):
+            if self.direction_y == 1:
                 return
-            self.direction = Vector2(0, -1)
+            self.direction_y = -1
+            self.direction_x = 0
         if direction == 'down':
-            if self.direction == Vector2(0, -1):
+            if self.direction_y == -1:
                 return
-            self.direction = Vector2(0, 1)
+            self.direction_y = 1
+            self.direction_x = 0
         if direction == 'left':
-            if self.direction == Vector2(1, 0):
+            if self.direction_x == 1:
                 return
-            self.direction = Vector2(-1, 0)
+            self.direction_x = -1
+            self.direction_y = 0
         if direction == 'right':
-            if self.direction == Vector2(-1, 0):
+            if self.direction_x == -1:
                 return
-            self.direction = Vector2(1, 0)
-    
+            self.direction_x = 1
+            self.direction_y = 0
+
     def grow_snake(self):
         self.grow = True
 
-cell_size = 40
-display_width = 20
-display_height = 15
+    def snake_hits_itself(self):
+        return self.body[0].collidelistall(self.body[1:])
 
-display = pygame.display.set_mode((cell_size * display_width, cell_size * display_height))
-clock = pygame.time.Clock()
-snake = Snake(10, 6, cell_size, display_width, display_height)
+def main():
+    cell_size = 30
+    display_width = 30
+    display_height = 20
 
-MOVE_SNAKE = pygame.USEREVENT
-pygame.time.set_timer(MOVE_SNAKE, 200)
+    display = pygame.display.set_mode((cell_size * display_width, cell_size * display_height))
+    pygame.display.set_caption("Snake 2023")
+    clock = pygame.time.Clock()
+    snake = Snake(10, 6, cell_size, display_width, display_height, display)
 
-running = True
+    sprites = pygame.sprite.Group()
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
+    MOVE_SNAKE = pygame.USEREVENT
+    pygame.time.set_timer(MOVE_SNAKE, 200)
+
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                if event.key == pygame.K_UP:
+                    snake.change_direction('up')
+                if event.key == pygame.K_DOWN:
+                    snake.change_direction('down')
+                if event.key == pygame.K_LEFT:
+                    snake.change_direction('left')
+                if event.key == pygame.K_RIGHT:
+                    snake.change_direction('right')
+                if event.key == pygame.K_g:
+                    snake.grow_snake()
+            if event.type == MOVE_SNAKE:
+                snake.move_snake()
+            
+            elif event.type == pygame.QUIT:
                 running = False
-            if event.key == pygame.K_UP:
-                snake.change_direction('up')
-            if event.key == pygame.K_DOWN:
-                snake.change_direction('down')
-            if event.key == pygame.K_LEFT:
-                snake.change_direction('left')
-            if event.key == pygame.K_RIGHT:
-                snake.change_direction('right')
-            if event.key == pygame.K_g:
-                snake.grow_snake()
-        if event.type == MOVE_SNAKE:
-            snake.move_snake()
-          
-        elif event.type == pygame.QUIT:
-            running = False
 
-    display.fill((0, 255, 0))
-    snake.plot_snake()
-    pygame.display.update()
+        display.fill((0, 255, 0))
+        snake.plot_snake()
+        pygame.display.update()
 
-    clock.tick(30)
+        clock.tick(30)
 
-pygame.quit()
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
     

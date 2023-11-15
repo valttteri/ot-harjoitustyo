@@ -1,2 +1,3 @@
 __pycache__
 testing_app.py
+.pylintrc
