@@ -41,21 +41,26 @@ class SnakeGame:
     def loop(self):
         while self.running:
             self.get_events()
+            self.plot_sprites()
 
-            self.display.fill((0, 255, 0))
-            self.snake.plot_snake()
-            self.sprites.draw(self.display)
-            if pygame.sprite.spritecollide(self.snake, self.walls, False):
-                self.running = False
-                print("game over")
-            if self.snake.snake_hits_itself():
-                self.running = False
-                print("game over")
+            if self.snake_collision():
+                self.snake.reset_snake()
             pygame.display.update()
 
             self.clock.tick(60)
 
         pygame.quit()
+    
+    def plot_sprites(self):
+        self.display.fill((0, 255, 0))
+        self.snake.plot_snake()
+        self.sprites.draw(self.display)
+    
+    def snake_collision(self):
+        if pygame.sprite.spritecollide(self.snake, self.walls, False):
+            return True
+        if self.snake.snake_hits_itself():
+            return True
     
     def get_events(self):
         for event in pygame.event.get():

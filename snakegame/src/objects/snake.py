@@ -3,6 +3,8 @@ import pygame
 class Snake(pygame.sprite.Sprite):
     def __init__(self, head_x:int, head_y:int, cell_size:int, width:int, height:int, display):
         super().__init__()
+        self.head_x = head_x
+        self.head_y = head_y
         self.cell_size = cell_size
         self.direction_x = 0
         self.direction_y = -1
@@ -16,8 +18,16 @@ class Snake(pygame.sprite.Sprite):
                 pygame.Rect(head_x * self.cell_size, (head_y + 1) * self.cell_size, self.cell_size, self.cell_size),
                 pygame.Rect(head_x * self.cell_size, (head_y + 2) * self.cell_size, self.cell_size, self.cell_size)
             ]
-
         self.rect = self.body[0]
+    
+    def reset_snake(self):
+        self.direction_x = 0
+        self.direction_y = -1
+        self.body = [
+                pygame.Rect(self.head_x * self.cell_size, self.head_y * self.cell_size, self.cell_size, self.cell_size),
+                pygame.Rect(self.head_x * self.cell_size, (self.head_y + 1) * self.cell_size, self.cell_size, self.cell_size),
+                pygame.Rect(self.head_x * self.cell_size, (self.head_y + 2) * self.cell_size, self.cell_size, self.cell_size)
+            ]
     
     def plot_snake(self):
         for part in self.body:
