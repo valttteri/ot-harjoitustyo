@@ -8,6 +8,8 @@ Tämä on repositorio kurssille **Ohjelmistotekniikka TKT20018.**
 
 [Tuntikirjanpito](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
 
+[Changelog](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
+
 ## Laskarit
 
 ### Viikko 1
