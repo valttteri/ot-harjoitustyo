@@ -55,26 +55,27 @@ class Snake(pygame.sprite.Sprite):
             self.body.pop()
     
     def change_direction(self, direction:str):
-        if direction == 'up':
-            if self.direction_y == 1:
-                return
-            self.direction_y = -1
-            self.direction_x = 0
-        if direction == 'down':
-            if self.direction_y == -1:
-                return
-            self.direction_y = 1
-            self.direction_x = 0
-        if direction == 'left':
-            if self.direction_x == 1:
-                return
-            self.direction_x = -1
-            self.direction_y = 0
-        if direction == 'right':
-            if self.direction_x == -1:
-                return
-            self.direction_x = 1
-            self.direction_y = 0
+        match direction:
+            case 'up':
+                if self.direction_y == 1:
+                    return
+                self.direction_y = -1
+                self.direction_x = 0
+            case 'down':
+                if self.direction_y == -1:
+                    return
+                self.direction_y = 1
+                self.direction_x = 0
+            case 'right':
+                if self.direction_x == -1:
+                    return
+                self.direction_x = 1
+                self.direction_y = 0
+            case 'left':
+                if self.direction_x == 1:
+                    return
+                self.direction_x = -1
+                self.direction_y = 0
 
     def grow_snake(self):
         self.grow = True
