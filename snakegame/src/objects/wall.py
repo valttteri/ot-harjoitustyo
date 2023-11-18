@@ -6,7 +6,8 @@ class Wall(pygame.sprite.Sprite):
         
         self.image = pygame.transform.scale(
             pygame.image.load('images/grass.png').convert_alpha(),
-            (30, 30))
+            (30, 30)
+            )
         self.rect = self.image.get_rect()
         self.rect.x = x_pos
         self.rect.y = y_pos
