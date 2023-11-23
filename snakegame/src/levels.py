@@ -24,3 +24,4 @@ level_one = [
 def get_level(status: str):
     if status == 'level_one':
         return level_one
+    return None
