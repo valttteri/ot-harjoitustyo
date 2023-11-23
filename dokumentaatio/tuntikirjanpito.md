@@ -8,4 +8,5 @@
 | 12.11. | 2h   | pygamen opettelu, käärme liikkuu ja sitä voi ohjata |
 | 15.11. | 5h   | sovelluslogiikan suunnittelu, refaktorointi |
 | 18.11. | 3h   | testit, refaktorointi |
-| yht.  | 17h   |
+| 23.11. | 2h   | pelialueella on ruokaa, pelaajan pisteet näkyvät ruudun ylänurkassa |
+| yht.  | 19h   |
