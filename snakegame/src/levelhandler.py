@@ -1,6 +1,8 @@
 import pygame
 from objects.snake import Snake
 from objects.wall import Wall
+from objects.food import Food
+from random import randint
 
 
 class LevelHandler:
@@ -17,6 +19,7 @@ class LevelHandler:
             10, 6, self.cell_size, self.display_width, self.display_height, self.display
         )
         self.walls = pygame.sprite.Group()
+        self.food = pygame.sprite.Group()
         self.sprite_groups = pygame.sprite.Group()
         self.get_sprites()
 
@@ -26,9 +29,13 @@ class LevelHandler:
                 cell = self.level_map[y][x]
                 x_pos = self.cell_size * x
                 y_pos = self.cell_size * y
-                if cell == 1:
-                    self.walls.add(Wall(x_pos, y_pos))
-        self.sprite_groups.add(self.walls)
+                match cell:
+                    case 1:
+                        self.walls.add(Wall(x_pos, y_pos))
+                    case 2:
+                        self.food.add(Food(x_pos, y_pos, self.cell_size))
+
+        self.sprite_groups.add(self.walls, self.food)
 
     def plot_sprites(self):
         self.display.fill((0, 255, 0))
@@ -41,3 +48,22 @@ class LevelHandler:
         if self.snake.snake_hits_itself():
             return True
         return False
+    
+    def snake_eats_food(self):
+        return pygame.sprite.spritecollide(self.snake, self.food, False)
+    
+    def relocate_food(self):
+        pass
+
+    def generate_coordinates(self, food:object):
+        while True:
+            x_pos = randint(1, 29) * 30
+            y_pos = randint(1, 19) * 30
+            food.change_position(x_pos, y_pos)
+            
+            if pygame.sprite.collide_rect(food, self.snake):
+                continue
+            if pygame.sprite.spritecollide(food, self.walls, False):
+                continue
+            break
+

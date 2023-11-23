@@ -2,7 +2,6 @@ import pygame
 from levelhandler import LevelHandler
 from levels import get_level
 
-
 class Loop:
     def __init__(self):
         self.status = "level_one"
@@ -10,8 +9,8 @@ class Loop:
         self.level_map = get_level(self.status)
         self.display_width = len(self.level_map[0])
         self.display_height = len(self.level_map)
-        self.level_generator = LevelHandler(self.level_map)
-        self.display = self.level_generator.display
+        self.level_handler = LevelHandler(self.level_map)
+        self.display = self.level_handler.display
         pygame.display.set_caption("Snake 2023")
         self.clock = pygame.time.Clock()
 
@@ -23,10 +22,13 @@ class Loop:
     def execute(self):
         while self.running:
             self.get_events()
-            self.level_generator.plot_sprites()
+            self.level_handler.plot_sprites()
 
-            if self.level_generator.snake_collision():
-                self.level_generator.snake.reset_snake()
+            if self.level_handler.snake_collision():
+                self.level_handler.snake.reset_snake()
+            food_consumed = self.level_handler.snake_eats_food()
+            if food_consumed:
+                self.level_handler.generate_coordinates(food_consumed[0])
             pygame.display.update()
 
             self.clock.tick(60)
@@ -39,17 +41,17 @@ class Loop:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
                 if event.key == pygame.K_UP:
-                    self.level_generator.snake.change_direction("up")
+                    self.level_handler.snake.change_direction("up")
                 if event.key == pygame.K_DOWN:
-                    self.level_generator.snake.change_direction("down")
+                    self.level_handler.snake.change_direction("down")
                 if event.key == pygame.K_LEFT:
-                    self.level_generator.snake.change_direction("left")
+                    self.level_handler.snake.change_direction("left")
                 if event.key == pygame.K_RIGHT:
-                    self.level_generator.snake.change_direction("right")
+                    self.level_handler.snake.change_direction("right")
                 if event.key == pygame.K_g:
-                    self.level_generator.snake.grow_snake()
-            if event.type == self.MOVE_SNAKE:
-                self.level_generator.snake.move_snake()
+                    self.level_handler.snake.grow_snake()
+            if event.type == self.move_snake:
+                self.level_handler.snake.move_snake()
 
             elif event.type == pygame.QUIT:
                 self.running = False
