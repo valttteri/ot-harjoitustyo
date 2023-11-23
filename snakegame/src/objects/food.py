@@ -13,7 +13,6 @@ class Food(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x_pos
         self.rect.y = y_pos
-        #self.rect = pygame.Rect(self.x_pos, self.y_pos, self.height, self.width)
     
     def change_position(self, x_pos, y_pos):
         self.rect.x = x_pos

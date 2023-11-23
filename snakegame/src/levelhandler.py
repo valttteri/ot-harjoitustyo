@@ -50,12 +50,10 @@ class LevelHandler:
         return False
     
     def snake_eats_food(self):
+        print(pygame.sprite.spritecollide(self.snake, self.food, False))
         return pygame.sprite.spritecollide(self.snake, self.food, False)
-    
-    def relocate_food(self):
-        pass
 
-    def generate_coordinates(self, food:object):
+    def relocate_food(self, food:object):
         while True:
             x_pos = randint(1, 29) * 30
             y_pos = randint(1, 19) * 30

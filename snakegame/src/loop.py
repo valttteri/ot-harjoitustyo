@@ -28,7 +28,8 @@ class Loop:
                 self.level_handler.snake.reset_snake()
             food_consumed = self.level_handler.snake_eats_food()
             if food_consumed:
-                self.level_handler.generate_coordinates(food_consumed[0])
+                self.level_handler.relocate_food(food_consumed[0])
+                self.level_handler.snake.grow_snake()
             pygame.display.update()
 
             self.clock.tick(60)
@@ -48,8 +49,6 @@ class Loop:
                     self.level_handler.snake.change_direction("left")
                 if event.key == pygame.K_RIGHT:
                     self.level_handler.snake.change_direction("right")
-                if event.key == pygame.K_g:
-                    self.level_handler.snake.grow_snake()
             if event.type == self.move_snake:
                 self.level_handler.snake.move_snake()
 
