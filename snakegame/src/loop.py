@@ -1,5 +1,6 @@
 import pygame
 from levelhandler import LevelHandler
+from score import Score
 from levels import get_level
 
 class Loop:
@@ -23,13 +24,17 @@ class Loop:
         while self.running:
             self.get_events()
             self.level_handler.plot_sprites()
+            self.level_handler.update_score()
 
             if self.level_handler.snake_collision():
                 self.level_handler.snake.reset_snake()
+                self.level_handler.score.reset()
+
             food_consumed = self.level_handler.snake_eats_food()
             if food_consumed:
                 self.level_handler.relocate_food(food_consumed[0])
                 self.level_handler.snake.grow_snake()
+                self.level_handler.increase_score()
             pygame.display.update()
 
             self.clock.tick(60)
