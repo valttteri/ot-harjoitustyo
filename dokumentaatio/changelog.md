@@ -3,7 +3,7 @@
 ## Viikko 3
 #### Komponentit
 - Lisätty Loop-luokka, joka käynnistää pelisilmukan
-- Lisätty LevelGenerator-luokka, joka generoi pelattavan tason
+- Lisätty LevelHandler-luokka, joka generoi pelattavan tason
 - Lisätty Snake-luokka, joka vastaa pelattavan käärmeen toiminnasta
 - Lisätty Wall-luokka, jonka avulla voi luoda pelialueelle seiniä
 
@@ -20,3 +20,19 @@
 - Käärme ei voi kääntyä menosuuntaansa nähden päinvastaiseen suuntaan
 - Käärmettä voi kasvattaa
 - Ohjelma huomaa, jos käärme törmää itseensä
+
+## Viikko 4
+#### Komponentit
+- Lisätty Food-luokka, jonka avulla voi generoida pelialueelle ruokaa
+- Lisätty Score-luokka, jonka avulla voi seurata pelaajan pisteitä
+- Uudet grafiikat: pelialuetta ympäröi kiviseinä ja käärmeelle tarjotaan kirsikoita
+
+#### Sovelluslogiikka
+- Pelialueella on yksi ruoka kerrallaan
+- Käärmettä voi kasvattaa syömällä ruokaa
+- Kun ruoka syödään, sille arvotaan uusi paikka pelialueelta
+- Ruoan syöminen kasvattaa pelaajan pisteitä, jotka näkyvät näytön ylänurkassa
+
+#### Testit
+- Käärme siirtyy oikealle paikalle, kun kutsutaan reset_snake-funktiota
+- Nyt invalid_direction_change-testi käy läpi jokaisen kielletyn suunnanmuutoksen
