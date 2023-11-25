@@ -9,11 +9,11 @@ Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päät
   - Pelin käynnistyessä avautuu aloitusnäyttö
   - Aloitusnäytöltä voi aloittaa uuden pelin, tarkastella huipputuloksia tai sulkea ohjelman
 - Pelaaminen
-  - Pelaaja voi ohjata matoa nuolinäppäimillä
-  - Pelialueella on "ruokaa", jota pelaaja kerää
-  - Mato pitenee aina kun sille syöttää ruokaa
+  - Pelaaja voi ohjata matoa nuolinäppäimillä &#x2714;
+  - Pelialueella on "ruokaa", jota pelaaja kerää &#x2714;
+  - Mato pitenee aina kun sille syöttää ruokaa &#x2714;
   - Peli päättyy voittoon, jos madosta tulee riittävän pitkä
-  - Peli päättyy häviöön, jos mato törmää seinään tai itseensä
+  - Peli päättyy häviöön, jos mato törmää seinään tai itseensä &#x2714;
   - Kun peli päättyy, pelaaja voi tallentaa omat pisteensä huipputuloksiin
 - Taukonäyttö
   - Käynnissä olevan pelin voi laittaa tauolle
