@@ -9,4 +9,5 @@
 | 15.11. | 5h   | sovelluslogiikan suunnittelu, refaktorointi |
 | 18.11. | 3h   | testit, refaktorointi |
 | 23.11. | 2h   | pelialueella on ruokaa, pelaajan pisteet näkyvät ruudun ylänurkassa |
-| yht.  | 19h   |
+| 25.11. | 2h   | testit, pelialueen ulkonäön muokkaaminen |
+| yht.  | 21h   |
