@@ -16,9 +16,8 @@ class LevelHandler:
             (self.cell_size * self.display_width, self.cell_size * self.display_height)
         )
         self.score = Score()
-        self.snake = Snake(
-            10, 6, self.cell_size, self.display_width, self.display_height, self.display
-        )
+        self.snake = None
+
         self.walls = pygame.sprite.Group()
         self.food = pygame.sprite.Group()
         self.sprite_groups = pygame.sprite.Group()
@@ -35,16 +34,20 @@ class LevelHandler:
                         self.walls.add(Wall(x_pos, y_pos))
                     case 2:
                         self.food.add(Food(x_pos, y_pos, self.cell_size))
+                    case 3:
+                        self.snake = Snake(
+                            x, y, self.cell_size, self.display_width, self.display_height, self.display
+                        )
 
         self.sprite_groups.add(self.walls, self.food)
 
     def plot_sprites(self):
-        self.display.fill((0, 255, 0))
+        self.display.fill((0,216,58))
         self.snake.plot_snake()
         self.sprite_groups.draw(self.display)
     
     def update_score(self):
-        self.score.show(self.display, 26*self.cell_size, 2*self.cell_size)
+        self.score.show(self.display, 26*self.cell_size, 1.5*self.cell_size)
     
     def increase_score(self):
         self.score.increase()

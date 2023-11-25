@@ -6,10 +6,12 @@ from levels import get_level
 class Loop:
     def __init__(self):
         self.status = "level_one"
-        self.cell_size = 30
         self.level_map = get_level(self.status)
+
         self.display_width = len(self.level_map[0])
         self.display_height = len(self.level_map)
+        self.cell_size = 30
+
         self.level_handler = LevelHandler(self.level_map)
         self.display = self.level_handler.display
         pygame.display.set_caption("Snake 2023")

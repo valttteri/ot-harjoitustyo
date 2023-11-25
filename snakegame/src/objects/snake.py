@@ -64,7 +64,7 @@ class Snake(pygame.sprite.Sprite):
 
     def plot_snake(self):
         for part in self.body:
-            pygame.draw.rect(self.display, (0, 0, 255), part)
+            pygame.draw.rect(self.display, (0,100,0), part)
 
     def move_snake(self):
         new_head = pygame.Rect(
