@@ -36,19 +36,24 @@ class LevelHandler:
                         self.food.add(Food(x_pos, y_pos, self.cell_size))
                     case 3:
                         self.snake = Snake(
-                            x, y, self.cell_size, self.display_width, self.display_height, self.display
+                            x,
+                            y,
+                            self.cell_size,
+                            self.display_width,
+                            self.display_height,
+                            self.display,
                         )
 
         self.sprite_groups.add(self.walls, self.food)
 
     def plot_sprites(self):
-        self.display.fill((0,216,58))
+        self.display.fill((0, 216, 58))
         self.snake.plot_snake()
         self.sprite_groups.draw(self.display)
-    
+
     def update_score(self):
-        self.score.show(self.display, 26*self.cell_size, 1.5*self.cell_size)
-    
+        self.score.show(self.display, 26 * self.cell_size, 1.5 * self.cell_size)
+
     def increase_score(self):
         self.score.increase()
 
@@ -64,12 +69,21 @@ class LevelHandler:
 
     def relocate_food(self, food: object):
         while True:
-            x_pos = randint(1, 29) * 30
-            y_pos = randint(1, 19) * 30
-            food.change_position(x_pos, y_pos)
+            x_pos = randint(1, 29) * self.cell_size
+            y_pos = randint(1, 19) * self.cell_size
+            new_position = pygame.Rect(
+                x_pos,
+                y_pos,
+                self.cell_size,
+                self.cell_size,
+            )
+            new_food = Food(x_pos, y_pos, self.cell_size)
 
-            if pygame.sprite.collide_rect(food, self.snake):
+            if new_position.collidelist(self.snake.body) != -1:
+                print("collision")
                 continue
-            if pygame.sprite.spritecollide(food, self.walls, False):
+            if pygame.sprite.spritecollide(new_food, self.walls, False):
                 continue
+
+            food.change_position(x_pos, y_pos)
             break
