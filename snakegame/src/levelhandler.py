@@ -1,9 +1,9 @@
+from random import randint
 import pygame
 from score import Score
 from objects.snake import Snake
 from objects.wall import Wall
 from objects.food import Food
-from random import randint
 
 
 class LevelHandler:
@@ -80,7 +80,6 @@ class LevelHandler:
             new_food = Food(x_pos, y_pos, self.cell_size)
 
             if new_position.collidelist(self.snake.body) != -1:
-                print("collision")
                 continue
             if pygame.sprite.spritecollide(new_food, self.walls, False):
                 continue

@@ -2,6 +2,5 @@ __pycache__
 testing_app.py
 .pylintrc
 .coverage
-.coveragerc
 htmlcov
 .pytest_cache

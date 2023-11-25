@@ -53,17 +53,39 @@ class TestSnake(unittest.TestCase):
     def test_invalid_direction_change(self):
         self.snake.change_direction("right")
         self.snake.move_snake()
-        self.assertEqual(self.snake.body[0].x, 330)
-        self.assertEqual(self.snake.body[0].y, 300)
-        self.assertEqual(self.snake.direction_x, 1)
-        self.assertEqual(self.snake.direction_y, 0)
-
         self.snake.change_direction("left")
         self.snake.move_snake()
         self.assertEqual(self.snake.body[0].x, 360)
         self.assertEqual(self.snake.body[0].y, 300)
         self.assertEqual(self.snake.direction_x, 1)
         self.assertEqual(self.snake.direction_y, 0)
+
+        self.snake.change_direction("down")
+        self.snake.move_snake()
+        self.snake.change_direction("up")
+        self.snake.move_snake()
+        self.assertEqual(self.snake.body[0].x, 360)
+        self.assertEqual(self.snake.body[0].y, 360)
+        self.assertEqual(self.snake.direction_x, 0)
+        self.assertEqual(self.snake.direction_y, 1)
+
+        self.snake.change_direction("left")
+        self.snake.move_snake()
+        self.snake.change_direction("right")
+        self.snake.move_snake()
+        self.assertEqual(self.snake.body[0].x, 300)
+        self.assertEqual(self.snake.body[0].y, 360)
+        self.assertEqual(self.snake.direction_x, -1)
+        self.assertEqual(self.snake.direction_y, 0)
+
+        self.snake.change_direction("up")
+        self.snake.move_snake()
+        self.snake.change_direction("down")
+        self.snake.move_snake()
+        self.assertEqual(self.snake.body[0].x, 300)
+        self.assertEqual(self.snake.body[0].y, 300)
+        self.assertEqual(self.snake.direction_x, 0)
+        self.assertEqual(self.snake.direction_y, -1)
 
     def test_snake_can_grow(self):
         self.assertEqual(len(self.snake.body), 3)
@@ -85,6 +107,18 @@ class TestSnake(unittest.TestCase):
         self.snake.move_snake()
         self.snake.move_snake()
         self.assertTrue(self.snake.snake_hits_itself())
+
+    def test_reset_snake(self):
+        intial_x_pos = self.snake.body[0].x
+        intial_y_pos = self.snake.body[0].y
+        self.snake.move_snake()
+        self.snake.move_snake()
+        self.snake.change_direction("right")
+        self.snake.move_snake()
+        self.snake.move_snake()
+        self.snake.reset_snake()
+        self.assertEqual(self.snake.body[0].x, intial_x_pos)
+        self.assertEqual(self.snake.body[0].y, intial_y_pos)
 
     def grow_snake_by(self, number: int):
         for i in range(3, number + 3):

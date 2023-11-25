@@ -1,7 +1,7 @@
 import pygame
 from levelhandler import LevelHandler
-from score import Score
 from levels import get_level
+
 
 class Loop:
     def __init__(self):
