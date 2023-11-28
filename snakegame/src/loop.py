@@ -1,12 +1,14 @@
 import pygame
 from gamestate import GameStateHandler
 
+
 class Loop:
-    def __init__(self):
-        self.state = "start"
+    def __init__(self, state, events):
+        self.state = state
         self.level = "level_one"
 
         self.game_state_handler = GameStateHandler(self.level)
+        self.events = events
         self.clock = pygame.time.Clock()
 
         self.move_snake = pygame.USEREVENT
@@ -37,20 +39,26 @@ class Loop:
             self.clock.tick(60)
 
         pygame.quit()
-    
+
     def game_keys_pressed(self):
-        for event in pygame.event.get():
+        for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
                 if event.key == pygame.K_UP:
                     self.game_state_handler.level_handler.change_snakes_direction("up")
                 if event.key == pygame.K_DOWN:
-                    self.game_state_handler.level_handler.change_snakes_direction("down")
+                    self.game_state_handler.level_handler.change_snakes_direction(
+                        "down"
+                    )
                 if event.key == pygame.K_LEFT:
-                    self.game_state_handler.level_handler.change_snakes_direction("left")
+                    self.game_state_handler.level_handler.change_snakes_direction(
+                        "left"
+                    )
                 if event.key == pygame.K_RIGHT:
-                    self.game_state_handler.level_handler.change_snakes_direction("right")
+                    self.game_state_handler.level_handler.change_snakes_direction(
+                        "right"
+                    )
                 if event.key == pygame.K_p:
                     self.state = "pause"
             if event.type == self.move_snake:
@@ -60,7 +68,7 @@ class Loop:
                 self.running = False
 
     def start_keys_pressed(self):
-        for event in pygame.event.get():
+        for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
@@ -70,7 +78,7 @@ class Loop:
                 self.running = False
 
     def pause_keys_pressed(self):
-        for event in pygame.event.get():
+        for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
@@ -78,9 +86,9 @@ class Loop:
                     self.state = "game_on"
             elif event.type == pygame.QUIT:
                 self.running = False
-    
+
     def game_over_keys_pressed(self):
-        for event in pygame.event.get():
+        for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
