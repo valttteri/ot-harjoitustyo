@@ -71,6 +71,20 @@ class LevelHandler:
     def snake_eats_food(self):
         return pygame.sprite.spritecollide(self.snake, self.food, False)
 
+    def change_snakes_direction(self, direction: str):
+        match direction:
+            case "up":
+                self.snake.change_direction("up")
+            case "down":
+                self.snake.change_direction("down")
+            case "left":
+                self.snake.change_direction("left")
+            case "right":
+                self.snake.change_direction("right")
+    
+    def snake_move(self):
+        self.snake.move_snake()
+
     def relocate_food(self, food: object):
         while True:
             x_pos = randint(1, 29) * self.cell_size
@@ -99,3 +113,4 @@ class LevelHandler:
         self.sprite_groups.empty()
         self.snake = None
         self.get_sprites()
+

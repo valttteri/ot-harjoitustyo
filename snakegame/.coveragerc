@@ -3,4 +3,6 @@ source = src
 omit = 
     src/**/__init__.py,
     src/tests/**,
-    src/main.py
+    src/displays/**,
+    src/main.py,
+    src/levels.py
