@@ -5,9 +5,9 @@ Projektin aihe on matopeli. Pelissä ohjataan matoa pitkin pelialuetta. Pelialue
 Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päättyy, kun tietty pistemäärä saavutetaan tai mato törmää seinään tai itseensä.
 
 ### Perusversion toiminnallisuudet
-- Aloitusnäyttö
-  - Pelin käynnistyessä avautuu aloitusnäyttö
-  - Aloitusnäytöltä voi aloittaa uuden pelin, tarkastella huipputuloksia tai sulkea ohjelman
+- Aloitusnäkymä
+  - Pelin käynnistyessä avautuu aloitusnäkymä &#x2714;
+  - Aloitusnäkymästä voi aloittaa uuden pelin, tarkastella huipputuloksia tai sulkea ohjelman
 - Pelaaminen
   - Pelaaja voi ohjata matoa nuolinäppäimillä &#x2714;
   - Pelialueella on "ruokaa", jota pelaaja kerää &#x2714;
@@ -15,9 +15,15 @@ Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päät
   - Peli päättyy voittoon, jos madosta tulee riittävän pitkä
   - Peli päättyy häviöön, jos mato törmää seinään tai itseensä &#x2714;
   - Kun peli päättyy, pelaaja voi tallentaa omat pisteensä huipputuloksiin
-- Taukonäyttö
-  - Käynnissä olevan pelin voi laittaa tauolle
-  - Taukonäytöltä voi poistua pelistä, aloittaa uuden pelin tai jatkaa meneillään olevaa peliä
+- Taukonäkymä
+  - Käynnissä olevan pelin voi laittaa tauolle &#x2714;
+  - Taukonäytöltä voi poistua pelistä tai jatkaa meneillään olevaa peliä &#x2714;
+- Game Over-näkymä
+  - Näytetään kun käärme törmää seinään tai itseensä &#x2714;
+  - Näkymästä voi aloittaa uuden pelin tai palata aloitusnäkymään &#x2714;
+- Voitto-näkymä
+  - Näytetään, kun pelaaja läpäisee tason
+  - Näkymästä voi aloittaa uuden pelin tai palata aloitusnäkymään
 - Huipputulokset
   - Sivu, jolle on listattu pelissä saavutetut pisteet parhausjärjestyksessä
 
