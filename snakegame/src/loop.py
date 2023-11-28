@@ -30,7 +30,7 @@ class Loop:
             if self.state == "game_over":
                 self.level_handler.game_over_screen()
                 self.game_over_keys_pressed()
-            
+
             if self.state == "pause":
                 self.level_handler.pause_screen()
                 self.pause_keys_pressed()
@@ -39,7 +39,7 @@ class Loop:
             self.clock.tick(60)
 
         pygame.quit()
-    
+
     def get_game_events(self):
         self.snake_collision_check()
         self.level_handler.plot_sprites()
@@ -83,7 +83,7 @@ class Loop:
                     self.state = "start"
             elif event.type == pygame.QUIT:
                 self.running = False
-    
+
     def pause_keys_pressed(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -93,7 +93,7 @@ class Loop:
                     self.state = "game_on"
             elif event.type == pygame.QUIT:
                 self.running = False
-    
+
     def start_keys_pressed(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -103,7 +103,7 @@ class Loop:
                     self.state = "game_on"
             elif event.type == pygame.QUIT:
                 self.running = False
-    
+
     def snake_collision_check(self):
         if self.level_handler.snake_collision():
             self.state = "game_over"
