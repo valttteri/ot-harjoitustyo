@@ -1,15 +1,12 @@
 import pygame
 from gamestate import GameStateHandler
-from levels import get_level
-
 
 class Loop:
     def __init__(self):
         self.state = "start"
         self.level = "level_one"
-        self.level_map = get_level(self.level)
 
-        self.game_state_handler = GameStateHandler()
+        self.game_state_handler = GameStateHandler(self.level)
         self.clock = pygame.time.Clock()
 
         self.move_snake = pygame.USEREVENT
