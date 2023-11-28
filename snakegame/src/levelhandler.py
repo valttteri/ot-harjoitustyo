@@ -81,7 +81,7 @@ class LevelHandler:
                 self.snake.change_direction("left")
             case "right":
                 self.snake.change_direction("right")
-    
+
     def snake_move(self):
         self.snake.move_snake()
 
@@ -113,4 +113,3 @@ class LevelHandler:
         self.sprite_groups.empty()
         self.snake = None
         self.get_sprites()
-

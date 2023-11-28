@@ -7,7 +7,7 @@ from levels import get_level
 
 
 class GameStateHandler:
-    def __init__(self, level:str):
+    def __init__(self, level: str):
         self.new_state = None
 
         self.level = level
@@ -26,7 +26,7 @@ class GameStateHandler:
 
     def execute_state(self, state):
         match state:
-            case"start":
+            case "start":
                 self.start_screen.draw()
             case "pause":
                 self.pause_screen.draw()
@@ -34,7 +34,7 @@ class GameStateHandler:
                 self.game_over_screen.draw()
             case "game_on":
                 self.get_game_events()
-    
+
     def change_state(self):
         return self.new_state
 
