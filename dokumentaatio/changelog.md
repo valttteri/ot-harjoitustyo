@@ -23,16 +23,23 @@
 
 ## Viikko 4
 #### Komponentit
-- Lisätty Food-luokka, jonka avulla voi generoida pelialueelle ruokaa
-- Lisätty Score-luokka, jonka avulla voi seurata pelaajan pisteitä
+- Food-luokka, jonka avulla voi generoida pelialueelle ruokaa
+- Score-luokka, jonka avulla voi seurata pelaajan pisteitä
 - Uudet grafiikat: pelialuetta ympäröi kiviseinä ja käärmeelle tarjotaan kirsikoita
+- GameStates-luokka, joka hallinnoi pelin eri tiloja
+- Displays-hakemisto, josta haetaan aloitus- tauko- ja peli ohi- näkymät
 
 #### Sovelluslogiikka
 - Pelialueella on yksi ruoka kerrallaan
 - Käärmettä voi kasvattaa syömällä ruokaa
 - Kun ruoka syödään, sille arvotaan uusi paikka pelialueelta
 - Ruoan syöminen kasvattaa pelaajan pisteitä, jotka näkyvät näytön ylänurkassa
+- Pelin käynnistyessä avautuu aloitusnäkymä, josta voi aloittaa uuden pelin
+- Pelin saa tauolle painamalla p-näppäintä
+- Peli päättyy, kun käärme törmää seinään tai itseensä
+- Pelin päätyttyä voi palata takaisin aloitusnäkymään tai aloittaa uuden pelin
 
 #### Testit
 - Käärme siirtyy oikealle paikalle, kun kutsutaan reset_snake-funktiota
 - Nyt invalid_direction_change-testi käy läpi jokaisen kielletyn suunnanmuutoksen
+- Pelisilmukan testaaminen aloitettu
