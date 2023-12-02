@@ -18,7 +18,7 @@ class StubPygameEvents:
 class TestLoop(unittest.TestCase):
     def test_starting_game(self):
         events = [
-            StubEvent(pygame.KEYDOWN, pygame.K_a)
+            StubEvent(pygame.KEYDOWN, pygame.K_1)
         ]
 
         loop = Loop("start", StubPygameEvents(events))

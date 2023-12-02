@@ -32,6 +32,8 @@ class Loop:
                     self.pause_keys_pressed()
                 case "game_over":
                     self.game_over_keys_pressed()
+                case "victory":
+                    self.game_over_keys_pressed()
                 case "game_on":
                     self.game_keys_pressed()
 
@@ -72,8 +74,13 @@ class Loop:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
-                else:
+                if event.key == pygame.K_1:
                     self.state = "game_on"
+                if event.key == pygame.K_2:
+                    #TODO! high scores
+                    pass
+                if event.key == pygame.K_3:
+                    self.running = False
             elif event.type == pygame.QUIT:
                 self.running = False
 

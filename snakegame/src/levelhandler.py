@@ -45,6 +45,12 @@ class LevelHandler:
 
     def increase_score(self):
         self.score.increase()
+    
+    def victory(self):
+        if self.score.show() > 9:
+            self.reset_level()
+            return True
+        return False
 
     def snake_collision(self):
         if (

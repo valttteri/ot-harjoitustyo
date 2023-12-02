@@ -3,6 +3,7 @@ from levelhandler import LevelHandler
 from displays.start import StartScreen
 from displays.pause import PauseScreen
 from displays.game_over import GameOverScreen
+from displays.victory import VictoryScreen
 from levels import get_level
 
 
@@ -26,6 +27,7 @@ class GameStateHandler:
         self.start_screen = StartScreen(self.display, self.level_map)
         self.pause_screen = PauseScreen(self.display, self.level_map)
         self.game_over_screen = GameOverScreen(self.display, self.level_map)
+        self.victory_screen = VictoryScreen(self.display, self.level_map)
 
     def execute_state(self, state):
         match state:
@@ -37,6 +39,8 @@ class GameStateHandler:
                 self.game_over_screen.draw()
             case "game_on":
                 self.get_game_events()
+            case "victory":
+                self.victory_screen.draw()
 
     def change_state(self):
         return self.new_state
@@ -47,6 +51,8 @@ class GameStateHandler:
     def get_game_events(self):
         if self.level_handler.snake_collision():
             self.new_state = "game_over"
+        if self.level_handler.victory():
+            self.new_state = "victory"
         self.plot_sprites()
         self.display_score(26 * self.cell_size, 1.5 * self.cell_size)
 
