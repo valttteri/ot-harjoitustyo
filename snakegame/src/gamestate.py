@@ -54,6 +54,9 @@ class GameStateHandler:
 
     def reset_state(self):
         self.new_state = None
+    
+    def reset_score(self):
+        self.level_handler.reset_level_score()
 
     def get_game_events(self):
         if self.level_handler.snake_collision():
@@ -75,8 +78,35 @@ class GameStateHandler:
         self.level_sprites.draw(self.display)
 
     def plot_snake(self):
-        for part in self.level_handler.snake.snakes_body():
-            pygame.draw.rect(self.display, (0, 100, 0), part)
+        for i, part in enumerate(self.level_handler.snake.snakes_body()):
+            if i == 0:
+                self.plot_snakes_head(part)
+            else:
+                pygame.draw.rect(self.display, (0, 100, 0), part)
+    
+    def plot_snakes_head(self, head):
+        direction = self.level_handler.snake.snakes_direction()
+        match (direction["x"], direction["y"]):
+            case (0, -1):
+                self.display.blit(
+                    self.get_graphics("snake_head_up"),
+                    (head.x, head.y)
+                )
+            case (0, 1):
+                self.display.blit(
+                    self.get_graphics("snake_head_down"),
+                    (head.x, head.y)
+                )
+            case (-1, 0):
+                self.display.blit(
+                    self.get_graphics("snake_head_left"),
+                    (head.x, head.y)
+                )
+            case (1, 0):
+                self.display.blit(
+                    self.get_graphics("snake_head_right"),
+                    (head.x, head.y)
+                )
 
     def display_score(self, x_pos, y_pos):
         text = self.score_font.render(
@@ -91,3 +121,10 @@ class GameStateHandler:
         final_score = HighScore(self.level_handler.level_score(), "Mikko")
         self.high_scores.append(final_score)
         self.level_handler.reset_level_score()
+
+    def get_graphics(self, name:str):
+        image = pygame.transform.scale(
+            pygame.image.load(f"src/images/{name}.png").convert_alpha(),
+            (30, 30)
+        )
+        return image

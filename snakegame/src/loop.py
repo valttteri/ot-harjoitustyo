@@ -101,6 +101,7 @@ class Loop:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
                 if event.key == pygame.K_1:
+                    self.game_state_handler.reset_score()
                     self.state = "game_on"
                 if event.key == pygame.K_2:
                     self.state = "start"

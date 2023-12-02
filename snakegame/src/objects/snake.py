@@ -129,3 +129,6 @@ class Snake(pygame.sprite.Sprite):
 
     def snakes_body(self):
         return self.body
+    
+    def snakes_direction(self):
+        return self.direction
