@@ -43,3 +43,15 @@
 - Käärme siirtyy oikealle paikalle, kun kutsutaan reset_snake-funktiota
 - Nyt invalid_direction_change-testi käy läpi jokaisen kielletyn suunnanmuutoksen
 - Pelisilmukan testaaminen aloitettu
+
+## Viikko 5
+#### Komponentit
+- Uusi tila: voitto
+
+#### Sovelluslogiikka
+- Peli päättyy voittoon kun käärme kasvaa riittävän pitkäksi
+- Pelin päättyessä voittoon avautuu voittonäkymä
+- Voittonäkymästä voi aloittaa uuden pelin tai palata aloitusnäkymään
+
+#### Testit
+- ...
