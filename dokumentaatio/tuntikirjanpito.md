@@ -11,4 +11,5 @@
 | 23.11. | 2h   | pelialueella on ruokaa, pelaajan pisteet näkyvät ruudun ylänurkassa |
 | 25.11. | 2h   | testit, pelialueen ulkonäön muokkaaminen |
 | 28.11. | 5h   | pelin eri tilat, refaktorointi, testit |
-| yht.  | 26h   |
+| 2.12. | 5h   | viikkopalautteen inspiroimat muutokset, pelin eri tilat, grafiikat |
+| yht.  | 31h   |
