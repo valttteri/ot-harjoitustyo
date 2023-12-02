@@ -15,6 +15,7 @@ class Snake(pygame.sprite.Sprite):
         self.max_x_pos = self.cell_size * width
         self.max_y_pos = self.cell_size * height
         self.grow = False
+        self.direction_has_changed = False
 
         self.body = [
             pygame.Rect(
@@ -100,8 +101,11 @@ class Snake(pygame.sprite.Sprite):
             self.grow = False
         else:
             self.body.pop()
+        self.direction_has_changed = False
 
     def change_direction(self, direction: str):
+        if self.direction_has_changed:
+            return
         match direction:
             case "up":
                 if self.direction_y == 1:
@@ -123,6 +127,7 @@ class Snake(pygame.sprite.Sprite):
                     return
                 self.direction_x = -1
                 self.direction_y = 0
+        self.direction_has_changed = True
 
     def grow_snake(self):
         self.grow = True
