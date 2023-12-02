@@ -5,7 +5,6 @@ from objects.snake import Snake
 from objects.wall import Wall
 from objects.food import Food
 
-
 class LevelHandler:
     def __init__(self, level_map: list, cell_size: int):
         self.level_map = level_map
@@ -45,6 +44,12 @@ class LevelHandler:
 
     def increase_score(self):
         self.score.increase()
+    
+    def level_score(self):
+        return self.score.show()
+
+    def reset_level_score(self):
+        self.score.reset()
     
     def victory(self):
         if self.score.show() > 9:
@@ -100,7 +105,6 @@ class LevelHandler:
 
     def reset_level(self):
         self.snake.reset_snake()
-        self.score.reset()
         self.walls.empty()
         self.food.empty()
         self.sprite_groups.empty()

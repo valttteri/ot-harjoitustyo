@@ -4,13 +4,15 @@ from displays.start import StartScreen
 from displays.pause import PauseScreen
 from displays.game_over import GameOverScreen
 from displays.victory import VictoryScreen
+from displays.scores import HighScoreScreen
 from levels import get_level
+from high_score import HighScore
 
 
 class GameStateHandler:
     def __init__(self, level: str):
         self.new_state = None
-
+        self.high_scores = []
         self.level = level
         self.level_map = get_level(self.level)
         self.display_width = len(self.level_map[0])
@@ -28,6 +30,9 @@ class GameStateHandler:
         self.pause_screen = PauseScreen(self.display, self.level_map)
         self.game_over_screen = GameOverScreen(self.display, self.level_map)
         self.victory_screen = VictoryScreen(self.display, self.level_map)
+        self.high_score_screen = HighScoreScreen(
+            self.display, self.level_map, self.high_scores
+        )
 
     def execute_state(self, state):
         match state:
@@ -41,6 +46,8 @@ class GameStateHandler:
                 self.get_game_events()
             case "victory":
                 self.victory_screen.draw()
+            case "high_score":
+                self.high_score_screen.draw()
 
     def change_state(self):
         return self.new_state
@@ -79,3 +86,8 @@ class GameStateHandler:
             self.display.blit(text, (x_pos - 15, y_pos))
             return
         self.display.blit(text, (x_pos, y_pos))
+
+    def save_final_score(self):
+        final_score = HighScore(self.level_handler.level_score(), "Mikko")
+        self.high_scores.append(final_score)
+        self.level_handler.reset_level_score()

@@ -36,6 +36,8 @@ class Loop:
                     self.game_over_keys_pressed()
                 case "game_on":
                     self.game_keys_pressed()
+                case "high_score":
+                    self.high_score_keys_pressed()
 
             pygame.display.update()
             self.clock.tick(60)
@@ -77,8 +79,7 @@ class Loop:
                 if event.key == pygame.K_1:
                     self.state = "game_on"
                 if event.key == pygame.K_2:
-                    #TODO! high scores
-                    pass
+                    self.state = "high_score"
                 if event.key == pygame.K_3:
                     self.running = False
             elif event.type == pygame.QUIT:
@@ -102,6 +103,19 @@ class Loop:
                 if event.key == pygame.K_1:
                     self.state = "game_on"
                 if event.key == pygame.K_2:
+                    self.state = "start"
+                if event.key == pygame.K_3:
+                    self.game_state_handler.save_final_score()
+                    self.state = "start"
+            elif event.type == pygame.QUIT:
+                self.running = False
+
+    def high_score_keys_pressed(self):
+        for event in self.events.get_events():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.running = False
+                if event.key == pygame.K_1:
                     self.state = "start"
             elif event.type == pygame.QUIT:
                 self.running = False

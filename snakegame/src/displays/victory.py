@@ -7,6 +7,7 @@ class VictoryScreen:
         self.width = len(level_map[0])
         self.height = len(level_map)
         self.font = pygame.font.SysFont("Arial", 35)
+        self.small_font = pygame.font.SysFont("Arial", 28)
 
     def draw(self):
         self.display.fill((212, 175, 55))
@@ -19,7 +20,7 @@ class VictoryScreen:
             ),
         )
 
-        text = self.font.render("1 : New game", True, (0, 0, 0))
+        text = self.small_font.render("1 : New game", True, (0, 0, 0))
         self.display.blit(
             text,
             (
@@ -28,11 +29,19 @@ class VictoryScreen:
             ),
         )
 
-        text = self.font.render("2 : Main menu", True, (0, 0, 0))
+        text = self.small_font.render("2 : Main menu", True, (0, 0, 0))
         self.display.blit(
             text,
             (
                 (self.width * 30) // 2 - 100,
-                (self.height * 30) // 2 + 30,
+                (self.height * 30) // 2 + 20,
+            ),
+        )
+        text = self.small_font.render("3 : Submit score", True, (0, 0, 0))
+        self.display.blit(
+            text,
+            (
+                (self.width * 30) // 2 - 100,
+                (self.height * 30) // 2 + 50,
             ),
         )
