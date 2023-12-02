@@ -6,32 +6,29 @@ class Snake(pygame.sprite.Sprite):
         self, head_x: int, head_y: int, cell_size: int, width: int, height: int
     ):
         super().__init__()
-        self.head_x = head_x
-        self.head_y = head_y
         self.cell_size = cell_size
-        self.direction_x = 0
-        self.direction_y = -1
-        self.max_x_pos = self.cell_size * width
-        self.max_y_pos = self.cell_size * height
+        self.head_pos = {"x": head_x, "y": head_y}
+        self.direction = {"x": 0, "y": -1}
+        self.max_pos = {"x": self.cell_size * width, "y": self.cell_size * height}
         self.grow = False
         self.direction_has_changed = False
 
         self.body = [
             pygame.Rect(
-                head_x * self.cell_size,
-                head_y * self.cell_size,
+                self.head_pos["x"] * self.cell_size,
+                self.head_pos["y"] * self.cell_size,
                 self.cell_size,
                 self.cell_size,
             ),
             pygame.Rect(
-                head_x * self.cell_size,
-                (head_y + 1) * self.cell_size,
+                self.head_pos["x"] * self.cell_size,
+                (self.head_pos["y"] + 1) * self.cell_size,
                 self.cell_size,
                 self.cell_size,
             ),
             pygame.Rect(
-                head_x * self.cell_size,
-                (head_y + 2) * self.cell_size,
+                self.head_pos["x"] * self.cell_size,
+                (self.head_pos["y"] + 2) * self.cell_size,
                 self.cell_size,
                 self.cell_size,
             ),
@@ -39,24 +36,24 @@ class Snake(pygame.sprite.Sprite):
         self.rect = self.body[0]
 
     def reset_snake(self):
-        self.direction_x = 0
-        self.direction_y = -1
+        self.direction["x"] = 0
+        self.direction["y"] = -1
         self.body = [
             pygame.Rect(
-                self.head_x * self.cell_size,
-                self.head_y * self.cell_size,
+                self.head_pos["x"] * self.cell_size,
+                self.head_pos["y"] * self.cell_size,
                 self.cell_size,
                 self.cell_size,
             ),
             pygame.Rect(
-                self.head_x * self.cell_size,
-                (self.head_y + 1) * self.cell_size,
+                self.head_pos["x"] * self.cell_size,
+                (self.head_pos["y"] + 1) * self.cell_size,
                 self.cell_size,
                 self.cell_size,
             ),
             pygame.Rect(
-                self.head_x * self.cell_size,
-                (self.head_y + 2) * self.cell_size,
+                self.head_pos["x"] * self.cell_size,
+                (self.head_pos["y"] + 2) * self.cell_size,
                 self.cell_size,
                 self.cell_size,
             ),
@@ -67,26 +64,26 @@ class Snake(pygame.sprite.Sprite):
             self.body[0].x, self.body[0].y, self.cell_size, self.cell_size
         )
         new_head.move_ip(
-            self.cell_size * self.direction_x, self.cell_size * self.direction_y
+            self.cell_size * self.direction["x"], self.cell_size * self.direction["y"]
         )
         if new_head.x < 0:
             new_head = pygame.Rect(
-                self.max_x_pos - self.cell_size,
+                self.max_pos["x"] - self.cell_size,
                 self.body[0].y,
                 self.cell_size,
                 self.cell_size,
             )
-        if new_head.x >= self.max_x_pos:
+        if new_head.x >= self.max_pos["x"]:
             new_head = pygame.Rect(0, self.body[0].y, self.cell_size, self.cell_size)
 
         if new_head.y < 0:
             new_head = pygame.Rect(
                 self.body[0].x,
-                self.max_y_pos - self.cell_size,
+                self.max_pos["y"] - self.cell_size,
                 self.cell_size,
                 self.cell_size,
             )
-        if new_head.y >= self.max_y_pos:
+        if new_head.y >= self.max_pos["y"]:
             new_head = pygame.Rect(self.body[0].x, 0, self.cell_size, self.cell_size)
 
         self.body.insert(0, new_head)
@@ -103,25 +100,25 @@ class Snake(pygame.sprite.Sprite):
             return
         match direction:
             case "up":
-                if self.direction_y == 1:
+                if self.direction["y"] == 1:
                     return
-                self.direction_y = -1
-                self.direction_x = 0
+                self.direction["y"] = -1
+                self.direction["x"] = 0
             case "down":
-                if self.direction_y == -1:
+                if self.direction["y"] == -1:
                     return
-                self.direction_y = 1
-                self.direction_x = 0
+                self.direction["y"] = 1
+                self.direction["x"] = 0
             case "right":
-                if self.direction_x == -1:
+                if self.direction["x"] == -1:
                     return
-                self.direction_x = 1
-                self.direction_y = 0
+                self.direction["x"] = 1
+                self.direction["y"] = 0
             case "left":
-                if self.direction_x == 1:
+                if self.direction["x"] == 1:
                     return
-                self.direction_x = -1
-                self.direction_y = 0
+                self.direction["x"] = -1
+                self.direction["y"] = 0
         self.direction_has_changed = True
 
     def grow_snake(self):

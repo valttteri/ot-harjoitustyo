@@ -1,6 +1,6 @@
 class Score:
-    def __init__(self, score=0):
-        self.score = 0
+    def __init__(self, score):
+        self.score = score
 
     def increase(self):
         self.score += 1

@@ -13,7 +13,7 @@ class LevelHandler:
         self.display_height = len(self.level_map)
         self.cell_size = cell_size
 
-        self.score = Score()
+        self.score = Score(0)
         self.snake = None
 
         self.walls = pygame.sprite.Group()
@@ -91,7 +91,7 @@ class LevelHandler:
 
             food.change_position(x_pos, y_pos)
             break
-    
+
     def reset_level(self):
         self.snake.reset_snake()
         self.score.reset()
