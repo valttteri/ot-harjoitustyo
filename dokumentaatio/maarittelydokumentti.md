@@ -12,7 +12,7 @@ Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päät
   - Pelaaja voi ohjata matoa nuolinäppäimillä &#x2714;
   - Pelialueella on "ruokaa", jota pelaaja kerää &#x2714;
   - Mato pitenee aina kun sille syöttää ruokaa &#x2714;
-  - Peli päättyy voittoon, jos madosta tulee riittävän pitkä
+  - Peli päättyy voittoon, jos madosta tulee riittävän pitkä &#x2714;
   - Peli päättyy häviöön, jos mato törmää seinään tai itseensä &#x2714;
   - Kun peli päättyy, pelaaja voi tallentaa omat pisteensä huipputuloksiin
 - Taukonäkymä
@@ -22,8 +22,8 @@ Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päät
   - Näytetään kun käärme törmää seinään tai itseensä &#x2714;
   - Näkymästä voi aloittaa uuden pelin tai palata aloitusnäkymään &#x2714;
 - Voitto-näkymä
-  - Näytetään, kun pelaaja läpäisee tason
-  - Näkymästä voi aloittaa uuden pelin tai palata aloitusnäkymään
+  - Näytetään, kun pelaaja läpäisee tason &#x2714;
+  - Näkymästä voi aloittaa uuden pelin tai palata aloitusnäkymään &#x2714;
 - Huipputulokset
   - Sivu, jolle on listattu pelissä saavutetut pisteet parhausjärjestyksessä
 
