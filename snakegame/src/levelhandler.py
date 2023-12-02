@@ -7,15 +7,11 @@ from objects.food import Food
 
 
 class LevelHandler:
-    def __init__(self, level_map):
+    def __init__(self, level_map: list, cell_size: int):
         self.level_map = level_map
         self.display_width = len(self.level_map[0])
         self.display_height = len(self.level_map)
-        self.cell_size = 30
-        self.font = pygame.font.SysFont("Arial", 35)
-        self.display = pygame.display.set_mode(
-            (self.cell_size * self.display_width, self.cell_size * self.display_height)
-        )
+        self.cell_size = cell_size
 
         self.score = Score()
         self.snake = None
@@ -23,7 +19,6 @@ class LevelHandler:
         self.walls = pygame.sprite.Group()
         self.food = pygame.sprite.Group()
         self.sprite_groups = pygame.sprite.Group()
-        self.get_sprites()
 
     def get_sprites(self):
         for y in range(self.display_height):
@@ -43,18 +38,10 @@ class LevelHandler:
                             self.cell_size,
                             self.display_width,
                             self.display_height,
-                            self.display,
                         )
 
         self.sprite_groups.add(self.walls, self.food)
-
-    def plot_sprites(self):
-        self.display.fill((0, 216, 58))
-        self.snake.plot_snake()
-        self.sprite_groups.draw(self.display)
-
-    def update_score(self):
-        self.score.show(self.display, 26 * self.cell_size, 1.5 * self.cell_size)
+        return self.sprite_groups
 
     def increase_score(self):
         self.score.increase()
@@ -104,7 +91,7 @@ class LevelHandler:
 
             food.change_position(x_pos, y_pos)
             break
-
+    
     def reset_level(self):
         self.snake.reset_snake()
         self.score.reset()

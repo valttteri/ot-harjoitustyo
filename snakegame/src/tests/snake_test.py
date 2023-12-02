@@ -10,14 +10,12 @@ class TestSnake(unittest.TestCase):
         self.cell_size = 30
         self.width = 20
         self.height = 20
-        self.display = "display"
         self.snake = Snake(
             self.head_x,
             self.head_y,
             self.cell_size,
             self.width,
             self.height,
-            self.display,
         )
 
     def test_snakes_initial_position_correct(self):

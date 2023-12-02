@@ -3,7 +3,7 @@ import pygame
 
 class Snake(pygame.sprite.Sprite):
     def __init__(
-        self, head_x: int, head_y: int, cell_size: int, width: int, height: int, display
+        self, head_x: int, head_y: int, cell_size: int, width: int, height: int
     ):
         super().__init__()
         self.head_x = head_x
@@ -11,7 +11,6 @@ class Snake(pygame.sprite.Sprite):
         self.cell_size = cell_size
         self.direction_x = 0
         self.direction_y = -1
-        self.display = display
         self.max_x_pos = self.cell_size * width
         self.max_y_pos = self.cell_size * height
         self.grow = False
@@ -62,10 +61,6 @@ class Snake(pygame.sprite.Sprite):
                 self.cell_size,
             ),
         ]
-
-    def plot_snake(self):
-        for part in self.body:
-            pygame.draw.rect(self.display, (0,100,0), part)
 
     def move_snake(self):
         new_head = pygame.Rect(
@@ -135,5 +130,5 @@ class Snake(pygame.sprite.Sprite):
     def snake_hits_itself(self):
         return self.body[0].collidelistall(self.body[1:])
 
-    def rect_list(self):
+    def snakes_body(self):
         return self.body
