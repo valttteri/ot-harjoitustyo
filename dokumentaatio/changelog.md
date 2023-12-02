@@ -46,12 +46,16 @@
 
 ## Viikko 5
 #### Komponentit
-- Uusi tila: voitto
+- Voittonäkymä
+- Huipputulokset-näkymä
 
 #### Sovelluslogiikka
 - Peli päättyy voittoon kun käärme kasvaa riittävän pitkäksi
 - Pelin päättyessä voittoon avautuu voittonäkymä
-- Voittonäkymästä voi aloittaa uuden pelin tai palata aloitusnäkymään
+- Voittonäkymästä voi aloittaa uuden pelin, palata aloitusnäkymään tai tallentaa pisteet
+- Game over- näkymästä voi myös tallentaa pisteet
+- Huipputulokset-näkymässä on listattu kaikki saman pelikerran aikana tallennetut pisteet
+- Uudet grafiikat: käärmeellä on nyt pää
 
 #### Testit
 - ...
