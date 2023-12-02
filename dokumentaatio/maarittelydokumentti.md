@@ -7,14 +7,14 @@ Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päät
 ### Perusversion toiminnallisuudet
 - Aloitusnäkymä
   - Pelin käynnistyessä avautuu aloitusnäkymä &#x2714;
-  - Aloitusnäkymästä voi aloittaa uuden pelin, tarkastella huipputuloksia tai sulkea ohjelman
+  - Aloitusnäkymästä voi aloittaa uuden pelin, tarkastella huipputuloksia tai sulkea ohjelman &#x2714;
 - Pelaaminen
   - Pelaaja voi ohjata matoa nuolinäppäimillä &#x2714;
   - Pelialueella on "ruokaa", jota pelaaja kerää &#x2714;
   - Mato pitenee aina kun sille syöttää ruokaa &#x2714;
   - Peli päättyy voittoon, jos madosta tulee riittävän pitkä &#x2714;
   - Peli päättyy häviöön, jos mato törmää seinään tai itseensä &#x2714;
-  - Kun peli päättyy, pelaaja voi tallentaa omat pisteensä huipputuloksiin
+  - Kun peli päättyy, pelaaja voi tallentaa omat pisteensä huipputuloksiin &#x2714;
 - Taukonäkymä
   - Käynnissä olevan pelin voi laittaa tauolle &#x2714;
   - Taukonäytöltä voi poistua pelistä tai jatkaa meneillään olevaa peliä &#x2714;
@@ -25,7 +25,10 @@ Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päät
   - Näytetään, kun pelaaja läpäisee tason &#x2714;
   - Näkymästä voi aloittaa uuden pelin tai palata aloitusnäkymään &#x2714;
 - Huipputulokset
-  - Sivu, jolle on listattu pelissä saavutetut pisteet parhausjärjestyksessä
+  - Sivu, jolle on listattu pelissä saavutetut pisteet parhausjärjestyksessä &#x2714;
+  - Tulokset tallennetaan SQLite-tietokantaan
+- Ulkoasu
+  - Pelin ulkoasun näyttää järkevältä
 
 ### Jatkokehitysideoita
 Perusversion valmistuttua peliin voi lisätä seuraavia ominaisuuksia
