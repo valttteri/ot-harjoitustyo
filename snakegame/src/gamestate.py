@@ -57,7 +57,7 @@ class GameStateHandler:
 
     def reset_state(self):
         self.new_state = None
-    
+
     def reset_score(self):
         self.level_handler.reset_level_score()
 
@@ -84,32 +84,54 @@ class GameStateHandler:
         for i, part in enumerate(self.level_handler.snake.snakes_body()):
             if i == 0:
                 self.plot_snakes_head(part)
+            elif i == len(self.level_handler.snake.snakes_body()) - 1:
+                self.plot_snakes_tail(
+                    part, self.level_handler.snake.snakes_body()[i - 1]
+                )
             else:
-                pygame.draw.rect(self.display, (0, 100, 0), part)
-    
+                self.plot_snakes_body(
+                    part,
+                    self.level_handler.snake.snakes_body()[i - 1],
+                    self.level_handler.snake.snakes_body()[i + 1],
+                )
+
+    def plot_snakes_body(self, part, previous_part, next_part):
+        if previous_part.y == part.y == next_part.y:
+            self.display_graphics("snake_body_hz", part.x, part.y)
+        elif previous_part.x == part.x == next_part.x:
+            self.display_graphics("snake_body_vert", part.x, part.y)
+        #elif previous_part.y > part.y and next_part.y == part.y:
+        #    self.display_graphics("snake_turn_bottom_left", part.x, part.y)
+        #elif previous_part.y < part.y and next_part.y == part.y:
+        #    self.display_graphics("snake_turn_top_right", part.x, part.y)
+        #elif previous_part.y > part.y and next_part.y == part.y:
+        #    self.display_graphics("snake_turn_bottom_right", part.x, part.y) 
+        #elif previous_part.y < part.y and next_part.y == part.y:
+        #    self.display_graphics("snake_turn_bottom_right", part.x, part.y)
+        else:
+            pygame.draw.rect(self.display, (0, 100, 0), part)
+
+    def plot_snakes_tail(self, tail, part_before_tail):
+        if part_before_tail.y < tail.y:
+            self.display_graphics("snake_tail_down", tail.x, tail.y)
+        if part_before_tail.y > tail.y:
+            self.display_graphics("snake_tail_up", tail.x, tail.y)
+        if part_before_tail.x > tail.x:
+            self.display_graphics("snake_tail_left", tail.x, tail.y)
+        if part_before_tail.x < tail.x:
+            self.display_graphics("snake_tail_right", tail.x, tail.y)
+
     def plot_snakes_head(self, head):
         direction = self.level_handler.snake.snakes_direction()
         match (direction["x"], direction["y"]):
             case (0, -1):
-                self.display.blit(
-                    self.get_graphics("snake_head_up"),
-                    (head.x, head.y)
-                )
+                self.display_graphics("snake_head_up", head.x, head.y)
             case (0, 1):
-                self.display.blit(
-                    self.get_graphics("snake_head_down"),
-                    (head.x, head.y)
-                )
+                self.display_graphics("snake_head_down", head.x, head.y)
             case (-1, 0):
-                self.display.blit(
-                    self.get_graphics("snake_head_left"),
-                    (head.x, head.y)
-                )
+                self.display_graphics("snake_head_left", head.x, head.y)
             case (1, 0):
-                self.display.blit(
-                    self.get_graphics("snake_head_right"),
-                    (head.x, head.y)
-                )
+                self.display_graphics("snake_head_right", head.x, head.y)
 
     def display_score(self, x_pos, y_pos):
         text = self.score_font.render(
@@ -125,9 +147,14 @@ class GameStateHandler:
         self.high_scores.append(final_score)
         self.level_handler.reset_level_score()
 
-    def get_graphics(self, name:str):
+    def display_graphics(self, name: str, x_pos, y_pos):
         image = pygame.transform.scale(
-            pygame.image.load(f"src/images/{name}.png").convert_alpha(),
-            (30, 30)
+            pygame.image.load(f"src/images/{name}.png").convert_alpha(), (30, 30)
+        )
+        self.display.blit(image, (x_pos, y_pos))
+
+    def get_graphics(self, name: str):
+        image = pygame.transform.scale(
+            pygame.image.load(f"src/images/{name}.png").convert_alpha(), (30, 30)
         )
         return image
