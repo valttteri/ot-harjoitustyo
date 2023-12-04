@@ -11,6 +11,7 @@
     start_screen
     pause_screen
     game_over_screen
+    victory_screen
 }
 
   class objects {
