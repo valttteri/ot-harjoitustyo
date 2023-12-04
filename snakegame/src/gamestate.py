@@ -11,6 +11,7 @@ from high_score import HighScore
 
 class GameStateHandler:
     def __init__(self, level: str):
+        pygame.init()
         self.new_state = None
         self.high_scores = []
         self.level = level
@@ -21,6 +22,8 @@ class GameStateHandler:
         self.display = pygame.display.set_mode(
             (self.cell_size * self.display_width, self.cell_size * self.display_height)
         )
+        pygame.display.set_caption("Snake 2023")
+
         self.score_font = pygame.font.SysFont("Arial", 24)
 
         self.level_handler = LevelHandler(self.level_map, self.cell_size)
