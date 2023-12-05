@@ -13,4 +13,5 @@
 | 28.11. | 5h   | pelin eri tilat, refaktorointi, testit |
 | 2.12. | 5h   | viikkopalautteen inspiroimat muutokset, pelin eri tilat, grafiikat |
 | 4.12. | 1h   | grafiikat |
-| yht.  | 32h   |
+| 5.12. | 5h   | grafiikat, testit, refaktorointi |
+| yht.  | 37h   |
