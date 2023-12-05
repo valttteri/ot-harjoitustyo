@@ -4,8 +4,7 @@ import pygame
 class StartScreen:
     def __init__(self, display, level_map):
         self.display = display
-        self.width = len(level_map[0])
-        self.height = len(level_map)
+        self.width, self.height = len(level_map[0]), len(level_map)
         self.font = pygame.font.SysFont("Arial", 35)
         self.small_font = pygame.font.SysFont("Arial", 28)
 

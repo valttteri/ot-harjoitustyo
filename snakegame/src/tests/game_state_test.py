@@ -57,10 +57,10 @@ class StubLevelHandler:
 
     def change_snakes_direction(self, direction: str):
         self.snake.change_direction(direction)
-    
+
     def snake_move(self):
         self.snake.move_snake()
-    
+
     def snakes_current_direction(self):
         return self.snake.snakes_direction()
 
@@ -98,21 +98,28 @@ class TestGameState(unittest.TestCase):
             self.stub_renderer.stub_screen.status,
             "rendered high_score screen with high score [1, 2, 3]",
         )
-    
+
     def test_commanding_snakes_direction(self):
         self.game_state_handler.snake_direction_change("right")
         self.game_state_handler.snake_move()
-        self.assertEqual(self.stub_level_handler.snakes_current_direction(), {"x": 1, "y": 0})
+        self.assertEqual(
+            self.stub_level_handler.snakes_current_direction(), {"x": 1, "y": 0}
+        )
 
         self.game_state_handler.snake_direction_change("down")
         self.game_state_handler.snake_move()
-        self.assertEqual(self.stub_level_handler.snakes_current_direction(), {"x": 0, "y": 1})
+        self.assertEqual(
+            self.stub_level_handler.snakes_current_direction(), {"x": 0, "y": 1}
+        )
 
         self.game_state_handler.snake_direction_change("left")
         self.game_state_handler.snake_move()
-        self.assertEqual(self.stub_level_handler.snakes_current_direction(), {"x": -1, "y": 0})
+        self.assertEqual(
+            self.stub_level_handler.snakes_current_direction(), {"x": -1, "y": 0}
+        )
 
         self.game_state_handler.snake_direction_change("up")
         self.game_state_handler.snake_move()
-        self.assertEqual(self.stub_level_handler.snakes_current_direction(), {"x": 0, "y": -1})
-
+        self.assertEqual(
+            self.stub_level_handler.snakes_current_direction(), {"x": 0, "y": -1}
+        )

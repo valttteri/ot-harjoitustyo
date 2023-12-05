@@ -8,6 +8,10 @@ from levels import get_level
 
 
 class Renderer:
+    """
+    A class for rendering all game graphics
+    """
+
     def __init__(self, level):
         pygame.init()
         self.level_map = get_level(level)
@@ -19,35 +23,23 @@ class Renderer:
             (self.cell_size * self.display_width, self.cell_size * self.display_height)
         )
         pygame.display.set_caption("Snake 2023")
-        self.start_screen = StartScreen(self.display, self.level_map)
-        self.pause_screen = PauseScreen(self.display, self.level_map)
-        self.game_over_screen = GameOverScreen(self.display, self.level_map)
-        self.victory_screen = VictoryScreen(self.display, self.level_map)
-        self.high_score_screen = HighScoreScreen(
-            self.display, self.level_map
-        )
-        
-        self.score_font = pygame.font.SysFont("Arial", 24)
 
-    
     def render_screen(self, name, high_scores=None):
         options = {
             "start": StartScreen(self.display, self.level_map),
             "pause": PauseScreen(self.display, self.level_map),
             "game_over": GameOverScreen(self.display, self.level_map),
             "victory": VictoryScreen(self.display, self.level_map),
-            "high_score_screen": HighScoreScreen(
-                self.display, self.level_map
-            ) 
+            "high_score_screen": HighScoreScreen(self.display, self.level_map),
         }
         if name == "high_score_screen":
             options[name].draw(high_scores)
         else:
             options[name].draw()
-    
+
     def render_sprites(self, sprites):
         sprites.draw(self.display)
-    
+
     def display_graphics(self, name: str, x_pos, y_pos):
         """
         Renders a particular image on screen
@@ -56,7 +48,7 @@ class Renderer:
             pygame.image.load(f"src/images/{name}.png").convert_alpha(), (30, 30)
         )
         self.display.blit(image, (x_pos, y_pos))
-    
+
     def render_snakes_body(self, part, previous_part, next_part):
         """
         Render each part of the snake's body excluding the head and the tail
@@ -68,24 +60,20 @@ class Renderer:
             self.display_graphics("snake_body_vert", part.x, part.y)
 
         # when snake turns
-        elif (
-            part.y == min(previous_part.y, next_part.y)
-            and part.x == min(previous_part.x, next_part.x)
+        elif part.y == min(previous_part.y, next_part.y) and part.x == min(
+            previous_part.x, next_part.x
         ):
             self.display_graphics("snake_turn_bottom_right", part.x, part.y)
-        elif (
-            part.y == max(previous_part.y, next_part.y)
-            and part.x == max(previous_part.x, next_part.x)
+        elif part.y == max(previous_part.y, next_part.y) and part.x == max(
+            previous_part.x, next_part.x
         ):
             self.display_graphics("snake_turn_top_left", part.x, part.y)
-        elif (
-            part.y == max(previous_part.y, next_part.y)
-            and part.x == min(previous_part.x, next_part.x)
+        elif part.y == max(previous_part.y, next_part.y) and part.x == min(
+            previous_part.x, next_part.x
         ):
             self.display_graphics("snake_turn_top_right", part.x, part.y)
-        elif (
-            part.y == min(previous_part.y, next_part.y)
-            and part.x == max(previous_part.x, next_part.x)
+        elif part.y == min(previous_part.y, next_part.y) and part.x == max(
+            previous_part.x, next_part.x
         ):
             self.display_graphics("snake_turn_bottom_left", part.x, part.y)
 
@@ -115,13 +103,12 @@ class Renderer:
                 self.display_graphics("snake_head_left", head.x, head.y)
             case (1, 0):
                 self.display_graphics("snake_head_right", head.x, head.y)
-        
+
     def display_score(self, score):
         x_pos = 26 * self.cell_size
         y_pos = 1.5 * self.cell_size
-        text = self.score_font.render(
-            f"Score: {score}", True, (86, 86, 86)
-        )
+        score_font = pygame.font.SysFont("Arial", 24)
+        text = score_font.render(f"Score: {score}", True, (86, 86, 86))
         if score > 99:
             self.display.blit(text, (x_pos - 15, y_pos))
             return

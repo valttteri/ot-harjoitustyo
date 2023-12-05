@@ -7,7 +7,12 @@ from objects.wall import Wall
 from objects.food import Food
 from objects.grass import Grass
 
+
 class LevelHandler:
+    """
+    A class for generating a level and managing events
+    """
+
     def __init__(self, level: list, cell_size: int):
         self.level = level
         self.level_map = get_level(self.level)
@@ -53,15 +58,15 @@ class LevelHandler:
 
     def increase_score(self):
         self.score.increase()
-    
+
     def level_score(self):
         return self.score.show()
 
     def reset_level_score(self):
         self.score.reset()
-    
+
     def victory(self):
-        if self.score.show() > 3:
+        if self.score.show() > 99:
             self.reset_level()
             return True
         return False
@@ -83,7 +88,7 @@ class LevelHandler:
 
     def snake_move(self):
         self.snake.move_snake()
-    
+
     def snakes_current_direction(self):
         return self.snake.snakes_direction()
 
@@ -111,6 +116,7 @@ class LevelHandler:
         self.snake.reset_snake()
         self.walls.empty()
         self.food.empty()
+        self.grass.empty()
         self.sprite_groups.empty()
         self.snake = None
         self.get_sprites()

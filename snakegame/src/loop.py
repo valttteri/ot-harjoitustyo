@@ -2,6 +2,10 @@ import pygame
 
 
 class Loop:
+    """
+    The game loop. Reacts to keys being pressed and gives commands to game state handler.
+    """
+
     def __init__(
         self,
         state: str,
@@ -9,7 +13,7 @@ class Loop:
         events: object,
         game_state_handler: object,
         clock: object,
-        user_events: object
+        user_events: object,
     ):
         self.state = state
         self.level = level

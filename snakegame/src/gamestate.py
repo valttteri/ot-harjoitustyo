@@ -2,6 +2,11 @@ from high_score import HighScore
 
 
 class GameStateHandler:
+    """
+    A class for managing game states. GameStateHandler object gives
+    commands to the level handler and renderer
+    """
+
     def __init__(
         self, high_scores: list, level: str, renderer: object, level_handler: object
     ):

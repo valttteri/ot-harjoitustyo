@@ -8,13 +8,13 @@ from user_events import UserEvents
 
 
 class SnakeGame:
+    """
+    Initializes the game loop and starts the game.
+    """
+
     def __init__(self):
         self.game_state_handler = GameStateHandler(
-            [],
-            "level_one",
-            Renderer("level_one"),
-            LevelHandler("level_one", 30)
-
+            [], "level_one", Renderer("level_one"), LevelHandler("level_one", 30)
         )
 
         self.infinite_loop = Loop(
@@ -23,9 +23,10 @@ class SnakeGame:
             PygameEvents(),
             self.game_state_handler,
             PygameClock(60),
-            UserEvents()
+            UserEvents(),
         )
         self.infinite_loop.execute()
+
 
 if __name__ == "__main__":
     SnakeGame()

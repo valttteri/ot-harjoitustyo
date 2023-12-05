@@ -2,6 +2,10 @@ import pygame
 
 
 class Snake(pygame.sprite.Sprite):
+    """
+    A class for creating a snake object.
+    """
+
     def __init__(
         self, head_x: int, head_y: int, cell_size: int, width: int, height: int
     ):
@@ -129,6 +133,6 @@ class Snake(pygame.sprite.Sprite):
 
     def snakes_body(self):
         return self.body
-    
+
     def snakes_direction(self):
         return self.direction

@@ -6,8 +6,8 @@ class HighScoreScreen:
         self.display = display
         self.width = len(level_map[0])
         self.height = len(level_map)
-        self.font = pygame.font.SysFont("Arial", 35)
         self.small_font = pygame.font.SysFont("Arial", 28)
+        self.font = pygame.font.SysFont("Arial", 35)
 
     def draw(self, high_scores):
         self.display.fill((0, 100, 200))

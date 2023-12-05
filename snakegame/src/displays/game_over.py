@@ -4,8 +4,8 @@ import pygame
 class GameOverScreen:
     def __init__(self, display, level_map):
         self.display = display
-        self.width = len(level_map[0])
         self.height = len(level_map)
+        self.width = len(level_map[0])
         self.font = pygame.font.SysFont("Arial", 35)
         self.small_font = pygame.font.SysFont("Arial", 28)
 
@@ -37,7 +37,7 @@ class GameOverScreen:
                 (self.height * 30) // 2 + 20,
             ),
         )
-        
+
         text = self.small_font.render("3 : Submit score", True, (0, 0, 0))
         self.display.blit(
             text,
