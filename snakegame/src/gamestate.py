@@ -96,20 +96,36 @@ class GameStateHandler:
                 )
 
     def plot_snakes_body(self, part, previous_part, next_part):
+        """
+        Plot each part of the snakes body between its head and tail
+        """
+        # horizontal and vertical parts
         if previous_part.y == part.y == next_part.y:
             self.display_graphics("snake_body_hz", part.x, part.y)
         elif previous_part.x == part.x == next_part.x:
             self.display_graphics("snake_body_vert", part.x, part.y)
-        #elif previous_part.y > part.y and next_part.y == part.y:
-        #    self.display_graphics("snake_turn_bottom_left", part.x, part.y)
-        #elif previous_part.y < part.y and next_part.y == part.y:
-        #    self.display_graphics("snake_turn_top_right", part.x, part.y)
-        #elif previous_part.y > part.y and next_part.y == part.y:
-        #    self.display_graphics("snake_turn_bottom_right", part.x, part.y) 
-        #elif previous_part.y < part.y and next_part.y == part.y:
-        #    self.display_graphics("snake_turn_bottom_right", part.x, part.y)
-        else:
-            pygame.draw.rect(self.display, (0, 100, 0), part)
+
+        # when snake turns
+        elif (
+            part.y == min(previous_part.y, next_part.y)
+            and part.x == min(previous_part.x, next_part.x)
+        ):
+            self.display_graphics("snake_turn_bottom_right", part.x, part.y)
+        elif (
+            part.y == max(previous_part.y, next_part.y)
+            and part.x == max(previous_part.x, next_part.x)
+        ):
+            self.display_graphics("snake_turn_top_left", part.x, part.y)
+        elif (
+            part.y == max(previous_part.y, next_part.y)
+            and part.x == min(previous_part.x, next_part.x)
+        ):
+            self.display_graphics("snake_turn_top_right", part.x, part.y)
+        elif (
+            part.y == min(previous_part.y, next_part.y)
+            and part.x == max(previous_part.x, next_part.x)
+        ):
+            self.display_graphics("snake_turn_bottom_left", part.x, part.y)
 
     def plot_snakes_tail(self, tail, part_before_tail):
         if part_before_tail.y < tail.y:
