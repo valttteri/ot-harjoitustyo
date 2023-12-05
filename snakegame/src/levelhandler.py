@@ -2,13 +2,15 @@ from random import randint
 import pygame
 from score import Score
 from snake import Snake
+from levels import get_level
 from objects.wall import Wall
 from objects.food import Food
 from objects.grass import Grass
 
 class LevelHandler:
-    def __init__(self, level_map: list, cell_size: int):
-        self.level_map = level_map
+    def __init__(self, level: list, cell_size: int):
+        self.level = level
+        self.level_map = get_level(self.level)
         self.display_width = len(self.level_map[0])
         self.display_height = len(self.level_map)
         self.cell_size = cell_size

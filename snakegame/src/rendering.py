@@ -116,7 +116,9 @@ class Renderer:
             case (1, 0):
                 self.display_graphics("snake_head_right", head.x, head.y)
         
-    def display_score(self, score, x_pos, y_pos):
+    def display_score(self, score):
+        x_pos = 26 * self.cell_size
+        y_pos = 1.5 * self.cell_size
         text = self.score_font.render(
             f"Score: {score}", True, (86, 86, 86)
         )

@@ -7,4 +7,7 @@ omit =
     src/main.py,
     src/levels.py,
     src/objects/**,
-    src/rendering.py
+    src/rendering.py,
+    src/clock.py,
+    src/user_events.py
+    src/pygame_events.py

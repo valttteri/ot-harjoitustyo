@@ -3,17 +3,22 @@ import pygame
 
 class Loop:
     def __init__(
-        self, state: str, level: str, events: object, game_state_handler: object
+        self,
+        state: str,
+        level: str,
+        events: object,
+        game_state_handler: object,
+        clock: object,
+        user_events: object
     ):
         self.state = state
         self.level = level
 
         self.game_state_handler = game_state_handler
         self.events = events
-        self.clock = pygame.time.Clock()
+        self.clock = clock
 
-        self.move_snake = pygame.USEREVENT
-        pygame.time.set_timer(self.move_snake, 200)
+        self.user_events = user_events
 
         self.running = True
 
@@ -41,7 +46,7 @@ class Loop:
                     self.high_score_keys_pressed()
 
             pygame.display.update()
-            self.clock.tick(60)
+            self.clock.tick()
 
         pygame.quit()
 
@@ -53,20 +58,14 @@ class Loop:
                 if event.key == pygame.K_UP:
                     self.game_state_handler.snake_direction_change("up")
                 if event.key == pygame.K_DOWN:
-                    self.game_state_handler.snake_direction_change(
-                        "down"
-                    )
+                    self.game_state_handler.snake_direction_change("down")
                 if event.key == pygame.K_LEFT:
-                    self.game_state_handler.snake_direction_change(
-                        "left"
-                    )
+                    self.game_state_handler.snake_direction_change("left")
                 if event.key == pygame.K_RIGHT:
-                    self.game_state_handler.snake_direction_change(
-                        "right"
-                    )
+                    self.game_state_handler.snake_direction_change("right")
                 if event.key == pygame.K_p:
                     self.state = "pause"
-            if event.type == self.move_snake:
+            if event.type == self.user_events.time_to_move_snake():
                 self.game_state_handler.snake_move()
 
             elif event.type == pygame.QUIT:
@@ -105,6 +104,7 @@ class Loop:
                     self.game_state_handler.reset_score()
                     self.state = "game_on"
                 if event.key == pygame.K_2:
+                    self.game_state_handler.reset_score()
                     self.state = "start"
                 if event.key == pygame.K_3:
                     self.game_state_handler.save_final_score()

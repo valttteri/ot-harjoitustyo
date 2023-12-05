@@ -1,14 +1,13 @@
 import unittest
 import pygame
 from loop import Loop
-pygame.init()
 
 class StubEvent:
     def __init__(self, event_type, key):
         self.type = event_type
         self.key = key
 
-class StubPygameevents:
+class StubPygameEvents:
     def __init__(self, events):
         self.events = events
 
@@ -29,14 +28,24 @@ class StubRenderer:
     def __init__(self):
         pass
 
+class StubClock:
+    def __init__(self, fps):
+        self.fps = fps
+
+class StubUserEvents:
+    def __init__(self):
+        self.nothing = 1
+
 class TestLoop(unittest.TestCase):
     def setUp(self):
         self.events = []
         self.loop = Loop(
             "start",
             "level_one",
-            StubPygameevents(self.events),
-            StubGameEventHandler("level_one")
+            StubPygameEvents(self.events),
+            StubGameEventHandler("level_one"),
+            StubClock(60),
+            StubUserEvents()
         )
 
     def test_starting_game(self):

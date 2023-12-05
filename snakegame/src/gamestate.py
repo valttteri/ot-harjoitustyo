@@ -1,19 +1,16 @@
-import pygame
-from levelhandler import LevelHandler
-from levels import get_level
 from high_score import HighScore
 
 
 class GameStateHandler:
-    def __init__(self, high_scores:list, level: str, renderer: object):
+    def __init__(
+        self, high_scores: list, level: str, renderer: object, level_handler: object
+    ):
         self.new_state = None
         self.high_scores = high_scores
         self.level = level
-        self.level_map = get_level(self.level)
-        self.cell_size = 30
 
         self.renderer = renderer
-        self.level_handler = LevelHandler(self.level_map, self.cell_size)
+        self.level_handler = level_handler
         self.level_sprites = self.level_handler.get_sprites()
 
     def execute_state(self, state):
@@ -32,6 +29,9 @@ class GameStateHandler:
                 self.renderer.render_screen("high_score_screen", self.high_scores)
 
     def change_state(self):
+        """
+        Game loop calls this function when it's necessary to change the game state
+        """
         return self.new_state
 
     def reset_state(self):
@@ -51,16 +51,14 @@ class GameStateHandler:
             self.new_state = "victory"
         self.renderer.render_sprites(self.level_sprites)
         self.plot_snake()
-        self.renderer.display_score(
-            self.level_handler.score.show(), 26 * self.cell_size, 1.5 * self.cell_size
-        )
+        self.renderer.display_score(self.level_handler.score.show())
 
         food_consumed = self.level_handler.snake_eats_food()
         if food_consumed:
             self.level_handler.relocate_food(food_consumed[0])
             self.level_handler.snake.grow_snake()
             self.level_handler.increase_score()
-    
+
     def snake_direction_change(self, direction):
         match direction:
             case "up":
@@ -71,7 +69,7 @@ class GameStateHandler:
                 self.level_handler.change_snakes_direction("left")
             case "right":
                 self.level_handler.change_snakes_direction("right")
-    
+
     def snake_move(self):
         self.level_handler.snake_move()
 
@@ -93,6 +91,6 @@ class GameStateHandler:
                 )
 
     def save_final_score(self):
-        final_score = HighScore(self.level_handler.level_score(), "Mikko")
+        final_score = HighScore(self.level_handler.level_score())
         self.high_scores.append(final_score)
         self.level_handler.reset_level_score()
