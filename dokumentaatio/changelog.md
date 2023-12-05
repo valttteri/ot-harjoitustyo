@@ -48,6 +48,8 @@
 #### Komponentit
 - Voittonäkymä
 - Huipputulokset-näkymä
+- Renderer-luokka, joka renderöi kaikki pelin grafiikat
+- Uudet grafiikat: Käärme näyttää nyt käärmeeltä ja se liikkuu nurmikolla
 
 #### Sovelluslogiikka
 - Peli päättyy voittoon kun käärme kasvaa riittävän pitkäksi
@@ -55,7 +57,7 @@
 - Voittonäkymästä voi aloittaa uuden pelin, palata aloitusnäkymään tai tallentaa pisteet
 - Game over- näkymästä voi myös tallentaa pisteet
 - Huipputulokset-näkymässä on listattu kaikki saman pelikerran aikana tallennetut pisteet
-- Uudet grafiikat: käärmeellä on nyt pää
 
 #### Testit
-- ...
+- Pelisilmukan testikattavuutta laajennettu
+- GameStateHandlerin testaaminen aloitettu
