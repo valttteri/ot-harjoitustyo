@@ -5,4 +5,6 @@ omit =
     src/tests/**,
     src/displays/**,
     src/main.py,
-    src/levels.py
+    src/levels.py,
+    src/objects/**,
+    src/rendering.py

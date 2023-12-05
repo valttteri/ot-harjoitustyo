@@ -1,7 +1,7 @@
 from random import randint
 import pygame
 from score import Score
-from objects.snake import Snake
+from snake import Snake
 from objects.wall import Wall
 from objects.food import Food
 from objects.grass import Grass
@@ -59,7 +59,7 @@ class LevelHandler:
         self.score.reset()
     
     def victory(self):
-        if self.score.show() > 9:
+        if self.score.show() > 3:
             self.reset_level()
             return True
         return False
@@ -77,18 +77,13 @@ class LevelHandler:
         return pygame.sprite.spritecollide(self.snake, self.food, False)
 
     def change_snakes_direction(self, direction: str):
-        match direction:
-            case "up":
-                self.snake.change_direction("up")
-            case "down":
-                self.snake.change_direction("down")
-            case "left":
-                self.snake.change_direction("left")
-            case "right":
-                self.snake.change_direction("right")
+        self.snake.change_direction(direction)
 
     def snake_move(self):
         self.snake.move_snake()
+    
+    def snakes_current_direction(self):
+        return self.snake.snakes_direction()
 
     def relocate_food(self, food: object):
         while True:

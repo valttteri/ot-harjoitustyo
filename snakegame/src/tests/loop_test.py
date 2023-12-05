@@ -8,50 +8,125 @@ class StubEvent:
         self.type = event_type
         self.key = key
 
-class StubPygameEvents:
+class StubPygameevents:
     def __init__(self, events):
         self.events = events
 
     def get_events(self):
         return self.events
 
+class StubGameEventHandler:
+    def __init__(self, level):
+        self.level = level
+    
+    def reset_score(self):
+        print("score was reset")
+    
+    def save_final_score(self):
+        print("score was submitted")
+
+class StubRenderer:
+    def __init__(self):
+        pass
+
 class TestLoop(unittest.TestCase):
+    def setUp(self):
+        self.events = []
+        self.loop = Loop(
+            "start",
+            "level_one",
+            StubPygameevents(self.events),
+            StubGameEventHandler("level_one")
+        )
+
     def test_starting_game(self):
-        events = [
-            StubEvent(pygame.KEYDOWN, pygame.K_1)
-        ]
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_1))
 
-        loop = Loop("start", StubPygameEvents(events))
-        loop.start_keys_pressed()
+        self.loop.start_keys_pressed()
 
-        self.assertEqual(loop.state, "game_on")
+        self.assertEqual(self.loop.state, "game_on")
+    
+    def test_access_high_scores_from_start_menu(self):
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_2))
+
+        self.loop.start_keys_pressed()
+
+        self.assertEqual(self.loop.state, "high_score")
     
     def test_quit_game_from_start_menu(self):
-        events = [
-            StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE)
-        ]
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
+        self.loop.start_keys_pressed()
 
-        loop = Loop("start", StubPygameEvents(events))
-        loop.start_keys_pressed()
+        self.assertFalse(self.loop.running)
 
-        self.assertFalse(loop.running)
+        self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
+        self.loop.running = True
+        self.loop.start_keys_pressed()
+
+        self.assertFalse(self.loop.running)
+
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_3))
+        self.loop.running = True
+        self.loop.start_keys_pressed()
+
+        self.assertFalse(self.loop.running)
 
     def test_close_pause_menu(self):
-        events = [
-            StubEvent(pygame.KEYDOWN, pygame.K_p)
-        ]
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_p))
 
-        loop = Loop("pause", StubPygameEvents(events))
-        loop.pause_keys_pressed()
+        self.loop.pause_keys_pressed()
 
-        self.assertEqual(loop.state, "game_on")
+        self.assertEqual(self.loop.state, "game_on")
 
-    def test_quite_game_from_pause_menu(self):
-        events = [
-            StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE)
-        ]
+    def test_quit_game_from_pause_menu(self):
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
+        self.loop.pause_keys_pressed()
 
-        loop = Loop("pause", StubPygameEvents(events))
-        loop.pause_keys_pressed()
+        self.assertFalse(self.loop.running)
 
-        self.assertFalse(loop.running)
+        self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
+        self.loop.running = True
+
+        self.loop.pause_keys_pressed()
+        self.assertFalse(self.loop.running)
+    
+    def test_quit_game_from_game_over_menu(self):
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
+        self.loop.game_over_keys_pressed()
+
+        self.assertFalse(self.loop.running)
+
+        self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
+        self.loop.running = True
+
+        self.loop.game_over_keys_pressed()
+        self.assertFalse(self.loop.running)
+    
+    def test_start_new_game_from_game_over_menu(self):
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_1))
+        self.loop.running = True
+
+        self.loop.game_over_keys_pressed()
+        self.assertEqual(self.loop.state, "game_on")
+    
+    def test_pressing_keys_in_game_over_menu(self):
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_1))
+        self.loop.game_over_keys_pressed()
+
+        self.assertEqual(self.loop.state, "game_on")
+
+        self.loop.state = "game_over"
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_2))
+        self.loop.game_over_keys_pressed()
+
+        self.assertEqual(self.loop.state, "start")
+
+        self.loop.state = "game_over"
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_3))
+        self.loop.game_over_keys_pressed()
+
+        self.assertEqual(self.loop.state, "start")
+
+
+
+

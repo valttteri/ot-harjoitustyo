@@ -1,13 +1,14 @@
 import pygame
-from gamestate import GameStateHandler
 
 
 class Loop:
-    def __init__(self, state, events):
+    def __init__(
+        self, state: str, level: str, events: object, game_state_handler: object
+    ):
         self.state = state
-        self.level = "level_one"
+        self.level = level
 
-        self.game_state_handler = GameStateHandler(self.level)
+        self.game_state_handler = game_state_handler
         self.events = events
         self.clock = pygame.time.Clock()
 
@@ -50,23 +51,23 @@ class Loop:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
                 if event.key == pygame.K_UP:
-                    self.game_state_handler.level_handler.change_snakes_direction("up")
+                    self.game_state_handler.snake_direction_change("up")
                 if event.key == pygame.K_DOWN:
-                    self.game_state_handler.level_handler.change_snakes_direction(
+                    self.game_state_handler.snake_direction_change(
                         "down"
                     )
                 if event.key == pygame.K_LEFT:
-                    self.game_state_handler.level_handler.change_snakes_direction(
+                    self.game_state_handler.snake_direction_change(
                         "left"
                     )
                 if event.key == pygame.K_RIGHT:
-                    self.game_state_handler.level_handler.change_snakes_direction(
+                    self.game_state_handler.snake_direction_change(
                         "right"
                     )
                 if event.key == pygame.K_p:
                     self.state = "pause"
             if event.type == self.move_snake:
-                self.game_state_handler.level_handler.snake_move()
+                self.game_state_handler.snake_move()
 
             elif event.type == pygame.QUIT:
                 self.running = False
