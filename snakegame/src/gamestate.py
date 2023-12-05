@@ -77,8 +77,9 @@ class GameStateHandler:
 
     def plot_sprites(self):
         self.display.fill((0, 216, 58))
-        self.plot_snake()
         self.level_sprites.draw(self.display)
+        self.plot_snake()
+
 
     def plot_snake(self):
         for i, part in enumerate(self.level_handler.snake.snakes_body()):
@@ -164,13 +165,10 @@ class GameStateHandler:
         self.level_handler.reset_level_score()
 
     def display_graphics(self, name: str, x_pos, y_pos):
+        """
+        Renders a particular image on screen
+        """
         image = pygame.transform.scale(
             pygame.image.load(f"src/images/{name}.png").convert_alpha(), (30, 30)
         )
         self.display.blit(image, (x_pos, y_pos))
-
-    def get_graphics(self, name: str):
-        image = pygame.transform.scale(
-            pygame.image.load(f"src/images/{name}.png").convert_alpha(), (30, 30)
-        )
-        return image

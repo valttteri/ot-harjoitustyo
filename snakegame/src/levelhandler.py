@@ -4,6 +4,7 @@ from score import Score
 from objects.snake import Snake
 from objects.wall import Wall
 from objects.food import Food
+from objects.grass import Grass
 
 class LevelHandler:
     def __init__(self, level_map: list, cell_size: int):
@@ -17,6 +18,7 @@ class LevelHandler:
 
         self.walls = pygame.sprite.Group()
         self.food = pygame.sprite.Group()
+        self.grass = pygame.sprite.Group()
         self.sprite_groups = pygame.sprite.Group()
 
     def get_sprites(self):
@@ -26,11 +28,16 @@ class LevelHandler:
                 x_pos = self.cell_size * x
                 y_pos = self.cell_size * y
                 match cell:
+                    case 0:
+                        self.grass.add(Grass(x_pos, y_pos))
                     case 1:
+                        self.grass.add(Grass(x_pos, y_pos))
                         self.walls.add(Wall(x_pos, y_pos))
                     case 2:
+                        self.grass.add(Grass(x_pos, y_pos))
                         self.food.add(Food(x_pos, y_pos, self.cell_size))
                     case 3:
+                        self.grass.add(Grass(x_pos, y_pos))
                         self.snake = Snake(
                             x,
                             y,
@@ -39,7 +46,7 @@ class LevelHandler:
                             self.display_height,
                         )
 
-        self.sprite_groups.add(self.walls, self.food)
+        self.sprite_groups.add(self.grass, self.walls, self.food)
         return self.sprite_groups
 
     def increase_score(self):
