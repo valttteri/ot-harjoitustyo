@@ -98,4 +98,5 @@ class GameStateHandler:
     def save_final_score(self):
         final_score = HighScore(self.level_handler.level_score())
         self.high_scores.append(final_score)
+        self.high_scores.sort(key=lambda x: x.score, reverse=True)
         self.level_handler.reset_level_score()
