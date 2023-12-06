@@ -8,6 +8,7 @@ from stubs import (
     StubClock,
     StubPygameEvents,
     StubUserEvents,
+    StubDatabaseHandler,
 )
 from loop import Loop
 from gamestate import GameStateHandler
@@ -17,7 +18,11 @@ class TestLoop(unittest.TestCase):
     def setUp(self):
         self.game_state_handler_mock = Mock(
             wraps=GameStateHandler(
-                [], "level_one", StubRenderer(), StubLevelHandler("level_one", 30)
+                [],
+                "level_one",
+                StubRenderer(),
+                StubLevelHandler("level_one", 30),
+                StubDatabaseHandler()
             )
         )
         self.events = []

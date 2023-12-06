@@ -1,6 +1,7 @@
 import unittest
 from gamestate import GameStateHandler
 from snake import Snake
+from stubs import StubDatabaseHandler
 
 
 class StubGameEventHandler:
@@ -74,6 +75,7 @@ class TestGameState(unittest.TestCase):
             "level_one",
             self.stub_renderer,
             self.stub_level_handler,
+            StubDatabaseHandler()
         )
 
     def test_execute_state(self):

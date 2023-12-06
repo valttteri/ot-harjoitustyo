@@ -1,6 +1,15 @@
 import pygame
 from score import Score
 
+class StubDatabaseHandler:
+    def __init__(self):
+        self.location = "nothing"
+    
+    def get_high_scores(self):
+        return 1
+    
+    def update_database(self, nothing):
+        return nothing
 
 class StubImageLoader:
     def load_image(self, name: str):
