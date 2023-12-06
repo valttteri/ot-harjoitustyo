@@ -1,4 +1,5 @@
 from high_score import HighScore
+from datetime import datetime
 
 
 class GameStateHandler:
@@ -8,12 +9,12 @@ class GameStateHandler:
     """
 
     def __init__(
-        self, high_scores: list, level: str, renderer: object, level_handler: object
+        self, high_scores: list, level: str, renderer: object, level_handler: object, database_handler: object
     ):
         self.new_state = None
         self.high_scores = high_scores
         self.level = level
-
+        self.database_handler = database_handler
         self.renderer = renderer
         self.level_handler = level_handler
         self.level_sprites = self.level_handler.get_sprites()
@@ -96,7 +97,21 @@ class GameStateHandler:
                 )
 
     def save_final_score(self):
-        final_score = HighScore(self.level_handler.level_score())
+        final_score = HighScore(self.level_handler.level_score(), datetime.now().strftime("%d.%m.%Y klo %H:%M"))
         self.high_scores.append(final_score)
         self.high_scores.sort(key=lambda x: x.score, reverse=True)
+        if len(self.high_scores) > 10:
+            self.high_scores.pop()
         self.level_handler.reset_level_score()
+
+    def get_high_scores(self):
+        """
+        Get high scores from database
+        """
+        self.high_scores = self.database_handler.get_high_scores()
+    
+    def save_high_scores_to_database(self):
+        """
+        Save high scores to database when program closes
+        """
+        self.database_handler.update_database(self.high_scores)

@@ -27,6 +27,7 @@ class Loop:
         self.running = True
 
     def execute(self, stop=False):
+        self.game_state_handler.get_high_scores()
         while self.running:
             self.game_state_handler.execute_state(self.state)
 
@@ -55,6 +56,7 @@ class Loop:
             if stop:
                 break
 
+        self.game_state_handler.save_high_scores_to_database()
         self.events.quit()
 
     def game_keys_pressed(self):

@@ -3,3 +3,4 @@ testing_app.py
 .coverage
 htmlcov
 .pytest_cache
+*.db
