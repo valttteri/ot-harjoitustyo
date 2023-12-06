@@ -14,4 +14,5 @@
 | 2.12. | 5h   | viikkopalautteen inspiroimat muutokset, pelin eri tilat, grafiikat |
 | 4.12. | 1h   | grafiikat |
 | 5.12. | 5h   | grafiikat, testit, refaktorointi |
-| yht.  | 37h   |
+| 6.12. | 4h   | testit, SQLite-tietokannan integrointi |
+| yht.  | 41h   |
