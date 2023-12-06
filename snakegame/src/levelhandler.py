@@ -1,6 +1,5 @@
 from random import randint
 import pygame
-from score import Score
 from snake import Snake
 from levels import get_level
 from objects.wall import Wall
@@ -13,7 +12,7 @@ class LevelHandler:
     A class for generating a level and managing events
     """
 
-    def __init__(self, level: str, cell_size: int, image_loader: object):
+    def __init__(self, level: str, cell_size: int, image_loader: object, score:object):
         self.level = level
         self.level_map = get_level(self.level)
         self.display_width = len(self.level_map[0])
@@ -21,7 +20,7 @@ class LevelHandler:
         self.cell_size = cell_size
         self.image_loader = image_loader
 
-        self.score = Score(0)
+        self.score = score
         self.snake = None
 
         self.walls = pygame.sprite.Group()

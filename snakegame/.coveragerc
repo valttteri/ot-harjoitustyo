@@ -11,3 +11,5 @@ omit =
     src/clock.py,
     src/user_events.py
     src/pygame_events.py
+    src/image_loader.py
+    src/stubs.py
