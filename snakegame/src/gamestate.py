@@ -61,7 +61,7 @@ class GameStateHandler:
         food_consumed = self.level_handler.snake_eats_food()
         if food_consumed:
             self.level_handler.relocate_food(food_consumed[0])
-            self.level_handler.snake.grow_snake()
+            self.level_handler.grow_snake()
             self.level_handler.increase_score()
 
     def snake_direction_change(self, direction):
@@ -79,20 +79,20 @@ class GameStateHandler:
         self.level_handler.snake_move()
 
     def plot_snake(self):
-        for i, part in enumerate(self.level_handler.snake.snakes_body()):
+        for i, part in enumerate(self.level_handler.snakes_body()):
             if i == 0:
                 self.renderer.render_snakes_head(
-                    part, self.level_handler.snake.snakes_direction()
+                    part, self.level_handler.snakes_current_direction()
                 )
-            elif i == len(self.level_handler.snake.snakes_body()) - 1:
+            elif i == len(self.level_handler.snakes_body()) - 1:
                 self.renderer.render_snakes_tail(
-                    part, self.level_handler.snake.snakes_body()[i - 1]
+                    part, self.level_handler.snakes_body()[i - 1]
                 )
             else:
                 self.renderer.render_snakes_body(
                     part,
-                    self.level_handler.snake.snakes_body()[i - 1],
-                    self.level_handler.snake.snakes_body()[i + 1],
+                    self.level_handler.snakes_body()[i - 1],
+                    self.level_handler.snakes_body()[i + 1],
                 )
 
     def save_final_score(self):

@@ -13,12 +13,13 @@ class LevelHandler:
     A class for generating a level and managing events
     """
 
-    def __init__(self, level: list, cell_size: int):
+    def __init__(self, level: str, cell_size: int, image_loader: object):
         self.level = level
         self.level_map = get_level(self.level)
         self.display_width = len(self.level_map[0])
         self.display_height = len(self.level_map)
         self.cell_size = cell_size
+        self.image_loader = image_loader
 
         self.score = Score(0)
         self.snake = None
@@ -36,21 +37,21 @@ class LevelHandler:
                 y_pos = self.cell_size * y
                 match cell:
                     case 0:
-                        self.grass.add(Grass(x_pos, y_pos))
+                        self.grass.add(Grass(x_pos, y_pos, self.image_loader))
                     case 1:
-                        self.grass.add(Grass(x_pos, y_pos))
-                        self.walls.add(Wall(x_pos, y_pos))
+                        self.grass.add(Grass(x_pos, y_pos, self.image_loader))
+                        self.walls.add(Wall(self.image_loader, x_pos, y_pos))
                     case 2:
-                        self.grass.add(Grass(x_pos, y_pos))
-                        self.food.add(Food(x_pos, y_pos, self.cell_size))
+                        self.grass.add(Grass(x_pos, y_pos, self.image_loader))
+                        self.food.add(Food(x_pos, y_pos, self.cell_size, self.image_loader))
                     case 3:
-                        self.grass.add(Grass(x_pos, y_pos))
+                        self.grass.add(Grass(x_pos, y_pos, self.image_loader))
                         self.snake = Snake(
                             x,
                             y,
                             self.cell_size,
                             self.display_width,
-                            self.display_height,
+                            self.display_height
                         )
 
         self.sprite_groups.add(self.grass, self.walls, self.food)
@@ -89,6 +90,12 @@ class LevelHandler:
     def snake_move(self):
         self.snake.move_snake()
 
+    def grow_snake(self):
+        self.snake.grow_snake()
+
+    def snakes_body(self):
+        return self.snake.snakes_body()
+
     def snakes_current_direction(self):
         return self.snake.snakes_direction()
 
@@ -102,7 +109,7 @@ class LevelHandler:
                 self.cell_size,
                 self.cell_size,
             )
-            new_food = Food(x_pos, y_pos, self.cell_size)
+            new_food = Food(x_pos, y_pos, self.cell_size, self.image_loader)
 
             if new_position.collidelist(self.snake.body) != -1:
                 continue

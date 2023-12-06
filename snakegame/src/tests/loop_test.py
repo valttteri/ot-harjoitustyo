@@ -1,56 +1,31 @@
 import unittest
+from unittest.mock import Mock
 import pygame
+from stubs import (
+    StubRenderer,
+    StubLevelHandler,
+    StubEvent,
+    StubClock,
+    StubPygameEvents,
+    StubUserEvents,
+)
 from loop import Loop
-
-
-class StubEvent:
-    def __init__(self, event_type, key):
-        self.type = event_type
-        self.key = key
-
-
-class StubPygameEvents:
-    def __init__(self, events):
-        self.events = events
-
-    def get_events(self):
-        return self.events
-
-
-class StubGameEventHandler:
-    def __init__(self, level):
-        self.level = level
-
-    def reset_score(self):
-        print("score was reset")
-
-    def save_final_score(self):
-        print("score was submitted")
-
-
-class StubRenderer:
-    def __init__(self):
-        pass
-
-
-class StubClock:
-    def __init__(self, fps):
-        self.fps = fps
-
-
-class StubUserEvents:
-    def __init__(self):
-        self.nothing = 1
+from gamestate import GameStateHandler
 
 
 class TestLoop(unittest.TestCase):
     def setUp(self):
+        self.game_state_handler_mock = Mock(
+            wraps=GameStateHandler(
+                [], "level_one", StubRenderer(), StubLevelHandler("level_one", 30)
+            )
+        )
         self.events = []
         self.loop = Loop(
             "start",
             "level_one",
             StubPygameEvents(self.events),
-            StubGameEventHandler("level_one"),
+            self.game_state_handler_mock,
             StubClock(60),
             StubUserEvents(),
         )
@@ -141,4 +116,57 @@ class TestLoop(unittest.TestCase):
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_3))
         self.loop.game_over_keys_pressed()
 
+        self.assertEqual(self.loop.state, "start")
+
+    def test_correct_execute_state_parameter(self):
+        self.loop.execute(True)
+        self.game_state_handler_mock.execute_state.assert_called_with("start")
+
+    def test_correct_action_when_new_state(self):
+        states = ["pause", "game_over", "victory", "game_on", "high_score"]
+
+        for state in states:
+            self.game_state_handler_mock.change_state.return_value = state
+            self.loop.execute(True)
+            self.assertEqual(self.loop.state, state)
+            self.game_state_handler_mock.reset_state.assert_called()
+
+    def test_pressing_game_keys(self):
+        events = {
+            "up": StubEvent(pygame.KEYDOWN, pygame.K_UP),
+            "down": StubEvent(pygame.KEYDOWN, pygame.K_DOWN),
+            "left": StubEvent(pygame.KEYDOWN, pygame.K_LEFT),
+            "right": StubEvent(pygame.KEYDOWN, pygame.K_RIGHT),
+        }
+
+        for key, value in events.items():
+            self.events.append(value)
+            self.loop.game_keys_pressed()
+            self.game_state_handler_mock.snake_direction_change.assert_called_with(key)
+            self.events.pop()
+
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_p))
+        self.loop.game_keys_pressed()
+        self.assertEqual(self.loop.state, "pause")
+
+    def test_quit_during_game(self):
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
+        self.loop.game_keys_pressed()
+        self.assertFalse(self.loop.running)
+
+        self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
+        self.loop.game_keys_pressed()
+        self.assertFalse(self.loop.running)
+
+    def test_pressing_keys_at_high_score_screen(self):
+        self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
+        self.loop.high_score_keys_pressed()
+        self.assertFalse(self.loop.running)
+
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
+        self.loop.high_score_keys_pressed()
+        self.assertFalse(self.loop.running)
+
+        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_1))
+        self.loop.high_score_keys_pressed()
         self.assertEqual(self.loop.state, "start")

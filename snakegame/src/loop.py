@@ -26,7 +26,7 @@ class Loop:
 
         self.running = True
 
-    def execute(self):
+    def execute(self, stop=False):
         while self.running:
             self.game_state_handler.execute_state(self.state)
 
@@ -49,10 +49,13 @@ class Loop:
                 case "high_score":
                     self.high_score_keys_pressed()
 
-            pygame.display.update()
+            self.events.update_display()
             self.clock.tick()
 
-        pygame.quit()
+            if stop:
+                break
+
+        self.events.quit()
 
     def game_keys_pressed(self):
         for event in self.events.get_events():

@@ -5,6 +5,7 @@ from pygame_events import PygameEvents
 from rendering import Renderer
 from clock import PygameClock
 from user_events import UserEvents
+from image_loader import ImageLoader
 
 
 class SnakeGame:
@@ -13,8 +14,9 @@ class SnakeGame:
     """
 
     def __init__(self):
+        self.level_handler = LevelHandler("level_one", 30, ImageLoader())
         self.game_state_handler = GameStateHandler(
-            [], "level_one", Renderer("level_one"), LevelHandler("level_one", 30)
+            [], "level_one", Renderer("level_one"), self.level_handler
         )
 
         self.infinite_loop = Loop(
