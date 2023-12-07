@@ -1,6 +1,5 @@
 import sqlite3
 from high_score import HighScore
-from datetime import datetime
 
 
 class Database:
@@ -66,9 +65,9 @@ class Database:
 
         score_list = []
 
-        for score in sql_scores:
-            score_list.append(HighScore(score[0], score[1]))
-        
+        for sql_score in sql_scores:
+            score_list.append(HighScore(sql_score[0], sql_score[1]))
+
         connection.commit()
         connection.close()
 
@@ -82,24 +81,8 @@ class Database:
         self.clear_database()
         self.initialize_database()
 
-        for score in high_scores:
-            self.add_high_score(score)
+        for high_score in high_scores:
+            self.add_high_score(high_score)
 
         connection.commit()
         connection.close()
-
-if __name__ == "__main__":
-    db = Database("score_data.db")
-    db.initialize_database()
-
-    score = HighScore(20, datetime.now().strftime("%d.%m.%Y klo %H:%M"))
-    score2 = HighScore(10, datetime.now().strftime("%d.%m.%Y klo %H:%M"))
-    
-    scores = [score, score2]
-
-    db.update_database(scores)
-
-    score_list = db.get_high_scores()
-    for s in score_list:
-        print(str(s))
-    
