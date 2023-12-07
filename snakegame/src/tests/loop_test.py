@@ -20,7 +20,7 @@ class TestLoop(unittest.TestCase):
             wraps=GameStateHandler(
                 [],
                 "level_one",
-                StubRenderer(),
+                StubRenderer("level_one"),
                 StubLevelHandler("level_one", 30),
                 StubDatabaseHandler()
             )

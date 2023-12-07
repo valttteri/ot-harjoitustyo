@@ -46,9 +46,15 @@ class GameStateHandler:
         return self.new_state
 
     def reset_state(self):
+        """
+        Resets the game state
+        """
         self.new_state = None
 
     def reset_score(self):
+        """
+        Resets the player's score
+        """
         self.level_handler.reset_level_score()
 
     def get_game_events(self):
@@ -71,6 +77,9 @@ class GameStateHandler:
             self.level_handler.increase_score()
 
     def snake_direction_change(self, direction):
+        """
+        Gives the level handler commands to change the snake's direction
+        """
         match direction:
             case "up":
                 self.level_handler.change_snakes_direction("up")
@@ -82,9 +91,15 @@ class GameStateHandler:
                 self.level_handler.change_snakes_direction("right")
 
     def snake_move(self):
+        """
+        Gives the level handler a command to move the snake
+        """
         self.level_handler.snake_move()
 
     def plot_snake(self):
+        """
+        Handles the snakes generation
+        """
         for i, part in enumerate(self.level_handler.snakes_body()):
             if i == 0:
                 self.renderer.render_snakes_head(
@@ -102,6 +117,9 @@ class GameStateHandler:
                 )
 
     def save_final_score(self):
+        """
+        Saves the player's score
+        """
         final_score = HighScore(
             self.level_handler.level_score(),
             datetime.now().strftime("%d.%m.%Y klo %H:%M"),

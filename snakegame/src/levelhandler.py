@@ -29,6 +29,11 @@ class LevelHandler:
         self.sprite_groups = pygame.sprite.Group()
 
     def get_sprites(self):
+        """Generates sprite objects based on the level map
+
+        Returns:
+            self.sprite_groups: all sprite objects for the level
+        """
         for y in range(self.display_height):
             for x in range(self.display_width):
                 cell = self.level_map[y][x]
@@ -57,21 +62,46 @@ class LevelHandler:
         return self.sprite_groups
 
     def increase_score(self):
+        """
+        Increases player's score by one
+        """
         self.score.increase()
 
     def level_score(self):
+        """
+        Returns players score
+
+        Returns
+            self.score.show(): player's score
+        """
         return self.score.show()
 
     def reset_level_score(self):
+        """
+        Sets player's score to zero
+        """
         self.score.reset()
 
     def victory(self):
+        """Checks if the player has won
+
+        Returns:
+            True if player has enough points
+            False otherwise
+        """
         if self.score.show() > 99:
             self.reset_level()
             return True
         return False
 
     def snake_collision(self):
+        """Checks if the snake has collided with it's own body or an obstacle.
+        Resets the level if there's a collision
+
+        Returns:
+            True if a collision has happened
+            False otherwise
+        """
         if (
             pygame.sprite.spritecollide(self.snake, self.walls, True)
             or self.snake.snake_hits_itself()
@@ -81,24 +111,54 @@ class LevelHandler:
         return False
 
     def snake_eats_food(self):
+        """Checks if snake has 'eaten' a cherry
+
+        Returns:
+            True if a collision between snake and a food object has happened
+            False otherwise
+        """
         return pygame.sprite.spritecollide(self.snake, self.food, False)
 
     def change_snakes_direction(self, direction: str):
+        """
+        Gives the snake a command to change direction
+        """
         self.snake.change_direction(direction)
 
     def snake_move(self):
+        """
+        Gives the snake a command to move when the move_snake - user event triggers
+        """
         self.snake.move_snake()
 
     def grow_snake(self):
+        """
+        Gives the snake a command to grow
+        """
         self.snake.grow_snake()
 
     def snakes_body(self):
+        """Returns the snake's body
+
+        Returns:
+            self.snake.snakes_body(): the snake's body
+        """
         return self.snake.snakes_body()
 
     def snakes_current_direction(self):
+        """Returns the snakes current direction
+
+        Returns:
+            self.snake.snakes_direction(): the snake's current direction
+        """
         return self.snake.snakes_direction()
 
     def relocate_food(self, food: object):
+        """Moves a food object to a different location when it gets 'eaten' by the snake
+
+        Args:
+            food: the food object that was eaten
+        """
         while True:
             x_pos = randint(1, 29) * self.cell_size
             y_pos = randint(1, 19) * self.cell_size
@@ -119,6 +179,9 @@ class LevelHandler:
             break
 
     def reset_level(self):
+        """
+        Resets the level by removing every sprite and then generating them again
+        """
         self.snake.reset_snake()
         self.walls.empty()
         self.food.empty()

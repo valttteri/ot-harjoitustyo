@@ -1,5 +1,29 @@
 import pygame
 from score import Score
+from snake import Snake
+
+
+class StubGameEventHandler:
+    def __init__(self, level):
+        self.level = level
+
+    def reset_score(self):
+        print("score was reset")
+
+    def save_final_score(self):
+        print("score was submitted")
+
+
+class StubScreen:
+    def __init__(self, screen_type: str):
+        self.type = screen_type
+        self.status = None
+
+    def draw(self, high_score=None):
+        if high_score is not None:
+            self.status = f"rendered {self.type} screen with high score {high_score}"
+        else:
+            self.status = f"rendered {self.type} screen"
 
 
 class StubDatabaseHandler:
@@ -39,11 +63,23 @@ class StubPygameEvents:
 
 
 class StubRenderer:
-    def __init__(self):
-        pass
+    def __init__(self, level):
+        self.level = level
+        self.stub_screen = None
 
-    def render_screen(self, screen_type: str):
-        return screen_type
+    def render_screen(self, name, high_scores=None):
+        options = {
+            "start": StubScreen("start"),
+            "pause": StubScreen("pause"),
+            "game_over": StubScreen("game_over"),
+            "victory": StubScreen("victory"),
+            "high_score_screen": StubScreen("high_score"),
+        }
+        if name == "high_score_screen":
+            options[name].draw(high_scores)
+        else:
+            options[name].draw()
+        self.stub_screen = options[name]
 
     def render_sprites(self, level_sprites):
         return level_sprites
@@ -79,6 +115,7 @@ class StubLevelHandler:
         self.level = level
         self.cell_size = cell_size
         self.score = Score(0)
+        self.snake = Snake(6, 6, 30, 30, 20)
 
     def get_sprites(self):
         return 1
@@ -102,10 +139,13 @@ class StubLevelHandler:
         return [1, 2, 3, 4, 5]
 
     def snakes_current_direction(self):
-        return 1
+        return self.snake.snakes_direction()
 
-    def change_snakes_direction(self, direction):
-        return direction
+    def change_snakes_direction(self, direction: str):
+        self.snake.change_direction(direction)
+
+    def snake_move(self):
+        self.snake.move_snake()
 
     def relocate_food(self, food):
         return food
