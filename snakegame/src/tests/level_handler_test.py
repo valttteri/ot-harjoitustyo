@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import Mock
 from levelhandler import LevelHandler
-from stubs import StubImageLoader
-from score import Score
+from tests.stubs import StubImageLoader
+from objects.score import Score
 
 
 class TestLevelHandler(unittest.TestCase):

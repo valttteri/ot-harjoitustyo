@@ -1,6 +1,6 @@
 import unittest
 from gamestate import GameStateHandler
-from stubs import StubDatabaseHandler, StubRenderer, StubLevelHandler
+from tests.stubs import StubDatabaseHandler, StubRenderer, StubLevelHandler
 
 
 class TestGameState(unittest.TestCase):

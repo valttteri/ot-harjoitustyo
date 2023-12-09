@@ -6,7 +6,7 @@ from rendering import Renderer
 from clock import PygameClock
 from user_events import UserEvents
 from image_loader import ImageLoader
-from score import Score
+from objects.score import Score
 from database_handler import Database
 
 

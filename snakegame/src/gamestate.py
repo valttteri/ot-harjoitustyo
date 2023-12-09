@@ -25,6 +25,9 @@ class GameStateHandler:
         self.level_sprites = self.level_handler.get_sprites()
 
     def execute_state(self, state):
+        """
+        Does actions based on the current game state
+        """
         match state:
             case "start":
                 self.renderer.render_screen("start")
@@ -41,7 +44,8 @@ class GameStateHandler:
 
     def change_state(self):
         """
-        Game loop calls this function when it's necessary to change the game state
+        If the return value of this function is not None, 
+        game loop knows it's time to change the game state
         """
         return self.new_state
 

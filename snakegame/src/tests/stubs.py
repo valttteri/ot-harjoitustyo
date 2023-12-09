@@ -1,6 +1,6 @@
 import pygame
-from score import Score
-from snake import Snake
+from objects.score import Score
+from objects.snake import Snake
 
 
 class StubGameEventHandler:
@@ -27,9 +27,6 @@ class StubScreen:
 
 
 class StubDatabaseHandler:
-    def __init__(self):
-        self.location = "nothing"
-
     def get_high_scores(self):
         return 1
 

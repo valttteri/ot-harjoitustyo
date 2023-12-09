@@ -1,7 +1,7 @@
 from random import randint
 import pygame
-from snake import Snake
 from levels import get_level
+from objects.snake import Snake
 from objects.wall import Wall
 from objects.food import Food
 from objects.grass import Grass

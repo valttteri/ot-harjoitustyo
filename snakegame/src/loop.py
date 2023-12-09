@@ -3,7 +3,7 @@ import pygame
 
 class Loop:
     """
-    The game loop. Reacts to keys being pressed and gives commands to game state handler.
+    A class for managing the game loop.
     """
 
     def __init__(
@@ -27,6 +27,9 @@ class Loop:
         self.running = True
 
     def execute(self, stop=False):
+        """
+        The main game loop.
+        """
         self.game_state_handler.get_high_scores()
         while self.running:
             self.game_state_handler.execute_state(self.state)
@@ -60,6 +63,9 @@ class Loop:
         self.events.quit()
 
     def game_keys_pressed(self):
+        """
+        User presses a key when in game
+        """
         for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -81,6 +87,9 @@ class Loop:
                 self.running = False
 
     def start_keys_pressed(self):
+        """
+        User presses a key when in main menu
+        """
         for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -95,6 +104,9 @@ class Loop:
                 self.running = False
 
     def pause_keys_pressed(self):
+        """
+        User presses a key when game is paused
+        """
         for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -105,6 +117,9 @@ class Loop:
                 self.running = False
 
     def game_over_keys_pressed(self):
+        """
+        User presses a key when game is over
+        """
         for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -122,6 +137,9 @@ class Loop:
                 self.running = False
 
     def high_score_keys_pressed(self):
+        """
+        User presses a key when looking at high scores
+        """
         for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:

@@ -22,12 +22,18 @@ class Renderer:
         pygame.display.set_caption("Snake 2023")
 
     def render_screen(self, name, high_scores=None):
+        """
+        Renders a screen
+        """
         if name == "high_score_screen":
             HighScoreScreen(self.display, self.level_map).draw(high_scores)
         else:
             DefaultScreen(self.display, self.level_map).draw(name)
 
     def render_sprites(self, sprites):
+        """
+        Renders every sprite of a level
+        """
         sprites.draw(self.display)
 
     def display_graphics(self, name: str, x_pos, y_pos):
@@ -95,6 +101,9 @@ class Renderer:
                 self.display_graphics("snake_head_right", head.x, head.y)
 
     def display_score(self, score):
+        """
+        Renders the player's score
+        """
         x_pos = 26 * self.cell_size
         y_pos = 1.5 * self.cell_size
         score_font = pygame.font.SysFont("Arial", 24)

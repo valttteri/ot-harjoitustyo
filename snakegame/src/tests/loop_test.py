@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 import pygame
-from stubs import (
+from tests.stubs import (
     StubRenderer,
     StubLevelHandler,
     StubEvent,
