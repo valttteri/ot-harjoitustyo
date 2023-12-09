@@ -12,7 +12,7 @@ class DefaultScreen:
     def get_colour(self, screen_type):
         colours = {
             "game_over": (200, 200, 200),
-            "start": (0, 100, 200),
+            "start": (55, 174, 15),
             "victory": (212, 175, 55),
             "pause": (255, 100, 50),
         }
@@ -23,17 +23,17 @@ class DefaultScreen:
             "game_over": [
                 "Game over!",
                 "1: New game",
-                "2 : Main menu",
-                "3 : Submit score",
+                "2 : Submit score",
+                "Esc : Main menu",
             ],
             "start": [
                 "Snake Game 2023",
                 "1 : Start",
                 "2 : High Scores",
-                "3 : Exit",
+                "Esc : Exit",
             ],
-            "victory": ["You win!", "1: New game", "2 : Main menu", "3 : Submit score"],
-            "pause": ["Paused", "p : continue"],
+            "victory": ["You win!", "1: New game", "2 : Submit score", "Esc : Main menu"],
+            "pause": ["Paused", "p : Continue", "Esc: Main menu"]
         }
         return messages[screen_type]
 
@@ -53,7 +53,7 @@ class DefaultScreen:
                 text_center[1] += 60
                 continue
 
-            elif i == 1:
+            if i == 1:
                 text = self.small_font.render(message, True, (0, 0, 0))
                 text_rect = text.get_rect(center=text_center)
                 text_topleft = [text_rect.topleft[0], text_rect.topleft[1]]

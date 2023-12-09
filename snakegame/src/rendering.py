@@ -104,11 +104,8 @@ class Renderer:
         """
         Renders the player's score
         """
-        x_pos = 26 * self.cell_size
+        x_pos = 24 * self.cell_size
         y_pos = 1.5 * self.cell_size
-        score_font = pygame.font.SysFont("Arial", 24)
-        text = score_font.render(f"Score: {score}", True, (86, 86, 86))
-        if score > 99:
-            self.display.blit(text, (x_pos - 15, y_pos))
-            return
+        score_font = pygame.font.SysFont("arialblack", 24)
+        text = score_font.render(f"Score: {score}", True, (0, 0, 0))
         self.display.blit(text, (x_pos, y_pos))

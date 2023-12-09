@@ -98,8 +98,6 @@ class Loop:
                     self.state = "game_on"
                 if event.key == pygame.K_2:
                     self.state = "high_score"
-                if event.key == pygame.K_3:
-                    self.running = False
             elif event.type == pygame.QUIT:
                 self.running = False
 
@@ -110,7 +108,8 @@ class Loop:
         for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    self.running = False
+                    self.state = "start"
+                    self.game_state_handler.reset_score()
                 if event.key == pygame.K_p:
                     self.state = "game_on"
             elif event.type == pygame.QUIT:
@@ -123,14 +122,11 @@ class Loop:
         for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    self.running = False
+                    self.state = "start"
                 if event.key == pygame.K_1:
                     self.game_state_handler.reset_score()
                     self.state = "game_on"
                 if event.key == pygame.K_2:
-                    self.game_state_handler.reset_score()
-                    self.state = "start"
-                if event.key == pygame.K_3:
                     self.game_state_handler.save_final_score()
                     self.state = "start"
             elif event.type == pygame.QUIT:
@@ -143,8 +139,6 @@ class Loop:
         for event in self.events.get_events():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    self.running = False
-                if event.key == pygame.K_1:
                     self.state = "start"
             elif event.type == pygame.QUIT:
                 self.running = False

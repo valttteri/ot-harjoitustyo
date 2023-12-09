@@ -61,12 +61,6 @@ class TestLoop(unittest.TestCase):
 
         self.assertFalse(self.loop.running)
 
-        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_3))
-        self.loop.running = True
-        self.loop.start_keys_pressed()
-
-        self.assertFalse(self.loop.running)
-
     def test_close_pause_menu(self):
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_p))
 
@@ -75,23 +69,12 @@ class TestLoop(unittest.TestCase):
         self.assertEqual(self.loop.state, "game_on")
 
     def test_quit_game_from_pause_menu(self):
-        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
-        self.loop.pause_keys_pressed()
-
-        self.assertFalse(self.loop.running)
-
         self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
-        self.loop.running = True
 
         self.loop.pause_keys_pressed()
         self.assertFalse(self.loop.running)
 
     def test_quit_game_from_game_over_menu(self):
-        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
-        self.loop.game_over_keys_pressed()
-
-        self.assertFalse(self.loop.running)
-
         self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
         self.loop.running = True
 
@@ -113,12 +96,6 @@ class TestLoop(unittest.TestCase):
 
         self.loop.state = "game_over"
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_2))
-        self.loop.game_over_keys_pressed()
-
-        self.assertEqual(self.loop.state, "start")
-
-        self.loop.state = "game_over"
-        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_3))
         self.loop.game_over_keys_pressed()
 
         self.assertEqual(self.loop.state, "start")

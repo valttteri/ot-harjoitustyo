@@ -10,7 +10,7 @@ class HighScoreScreen:
         self.small_font = pygame.font.SysFont("arialblack", 25)
 
     def draw(self, high_scores):
-        self.display.fill((0, 100, 200))
+        self.display.fill((55, 174, 15))
         position_y = 130
         text = self.font.render("High Scores", True, (0, 0, 0))
         text_rect = text.get_rect(center=((self.width * 30) // 2, 100))
@@ -22,6 +22,6 @@ class HighScoreScreen:
             text_rect = text.get_rect(center=((self.width * 30) // 2, position_y))
             self.display.blit(text, text_rect)
 
-        text = self.small_font.render("1 : back to main menu", True, (0, 0, 0))
+        text = self.small_font.render("Esc : back to main menu", True, (0, 0, 0))
         text_rect = text.get_rect(center=((self.width * 30) // 2, position_y + 50))
         self.display.blit(text, text_rect)
