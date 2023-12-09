@@ -89,7 +89,7 @@ class LevelHandler:
             True if player has enough points
             False otherwise
         """
-        if self.score.show() > 99:
+        if self.score.show() > 1:
             self.reset_level()
             return True
         return False

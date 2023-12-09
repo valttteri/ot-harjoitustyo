@@ -1,8 +1,5 @@
 import pygame
-from displays.start import StartScreen
-from displays.pause import PauseScreen
-from displays.game_over import GameOverScreen
-from displays.victory import VictoryScreen
+from displays.default import DefaultScreen
 from displays.scores import HighScoreScreen
 from levels import get_level
 
@@ -25,17 +22,10 @@ class Renderer:
         pygame.display.set_caption("Snake 2023")
 
     def render_screen(self, name, high_scores=None):
-        options = {
-            "start": StartScreen(self.display, self.level_map),
-            "pause": PauseScreen(self.display, self.level_map),
-            "game_over": GameOverScreen(self.display, self.level_map),
-            "victory": VictoryScreen(self.display, self.level_map),
-            "high_score_screen": HighScoreScreen(self.display, self.level_map),
-        }
         if name == "high_score_screen":
-            options[name].draw(high_scores)
+            HighScoreScreen(self.display, self.level_map).draw(high_scores)
         else:
-            options[name].draw()
+            DefaultScreen(self.display, self.level_map).draw(name)
 
     def render_sprites(self, sprites):
         sprites.draw(self.display)
