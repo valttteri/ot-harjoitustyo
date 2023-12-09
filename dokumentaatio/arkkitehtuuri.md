@@ -1,27 +1,29 @@
+Ohjelman rakenne on suunnilleen seuraavanlainen
+
 ```mermaid
  classDiagram
     main -- loop
     loop -- gamestate
     gamestate -- levelhandler
-    gamestate -- displays
-    levelhandler -- score
+    gamestate -- database_handler
+    gamestate -- renderer
     levelhandler -- objects
+    renderer -- displays
 
   class displays {
-    start_screen
-    pause_screen
-    game_over_screen
-    victory_screen
+    default
+    scores
 }
 
   class objects {
     snake
     wall
     food
+    grass
 }
 ```
 
-Ohjelma toimii suurin piirtein seuraavalla tavalla, kun käyttäjä aloittaa uuden pelin:
+Ohjelma toimii seuraavalla tavalla, kun käyttäjä aloittaa uuden pelin:
 
 ```mermaid
 sequenceDiagram
