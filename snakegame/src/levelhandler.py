@@ -12,7 +12,16 @@ class LevelHandler:
     A class for generating a level and managing events
     """
 
-    def __init__(self, level: str, cell_size: int, image_loader: object, score:object):
+    def __init__(self, level: str, cell_size: int, image_loader: object, score: object):
+        """
+        Constructor for the class
+
+        Args:
+            level: name of the current level
+            cell_size: size of a level cell
+            image_loader: a tool for loading an image
+            score: the player's score for the game
+        """
         self.level = level
         self.level_map = get_level(self.level)
         self.display_width = len(self.level_map[0])
@@ -47,7 +56,9 @@ class LevelHandler:
                         self.walls.add(Wall(self.image_loader, x_pos, y_pos))
                     case 2:
                         self.grass.add(Grass(x_pos, y_pos, self.image_loader))
-                        self.food.add(Food(x_pos, y_pos, self.cell_size, self.image_loader))
+                        self.food.add(
+                            Food(x_pos, y_pos, self.cell_size, self.image_loader)
+                        )
                     case 3:
                         self.grass.add(Grass(x_pos, y_pos, self.image_loader))
                         self.snake = Snake(
@@ -55,7 +66,7 @@ class LevelHandler:
                             y,
                             self.cell_size,
                             self.display_width,
-                            self.display_height
+                            self.display_height,
                         )
 
         self.sprite_groups.add(self.grass, self.walls, self.food)

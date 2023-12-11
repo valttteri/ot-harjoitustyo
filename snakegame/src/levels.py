@@ -58,6 +58,15 @@ testing_level = [
 ]
 
 def get_level(status: str):
+    """
+    Returns a level map
+
+    Args:
+        status: the level's name
+
+    Returns:
+        A level map
+    """
     if status == 'level_one':
         return level_one
     if status == 'test':

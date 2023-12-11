@@ -6,7 +6,10 @@ omit =
     src/displays/**,
     src/main.py,
     src/levels.py,
-    src/objects/**,
+    src/objects/food.py,
+    src/objects/grass.py,
+    src/objects/score.py,
+    src/objects/wall.py,
     src/rendering.py,
     src/clock.py,
     src/user_events.py

@@ -1,16 +1,18 @@
-from datetime import datetime
-
-
 class HighScore:
+    """
+    A class for creating high score objects
+    """
+
     def __init__(self, score: int, timestamp):
-        #!TODO self.nickname = nickname
+        """
+        Constructor for the class
+
+        Args:
+            score: the score that player wanted to save
+            timestamp: the moment when this object was created
+        """
         self.score = score
         self.timestamp = timestamp
 
     def __str__(self):
         return f"{self.score} - {self.timestamp}"
-
-
-if __name__ == "__main__":
-    h = HighScore(20, datetime.now().strftime("%d.%m.%Y klo %H:%M"))
-    print(h.timestamp)

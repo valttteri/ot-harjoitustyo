@@ -15,6 +15,17 @@ class Loop:
         clock: object,
         user_events: object,
     ):
+        """
+        Constructor for the class
+
+        Args:
+            state: the initial game state
+            level: the initial level name
+            events: object that returns all pygame events
+            game_state_handler: a tool for managing the game states
+            clock: the pygame clock
+            user_events: returns the pygame userevents
+        """
         self.state = state
         self.level = level
 
@@ -29,6 +40,10 @@ class Loop:
     def execute(self, stop=False):
         """
         The main game loop.
+
+        Args:
+            stop: False by default. If true, then the game loop stops after the first loop.
+                This happens during test runs
         """
         self.game_state_handler.get_high_scores()
         while self.running:

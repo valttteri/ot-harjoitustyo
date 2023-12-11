@@ -16,6 +16,16 @@ class GameStateHandler:
         level_handler: object,
         database_handler: object,
     ):
+        """
+        Constructor for the class
+
+        Args:
+            high_scores: a list for storing HighScore objects
+            level: the name of the current level
+            renderer: a tool for rendering graphics
+            level_handler: level handler for the current level
+            database_handler: a tool for managing the database
+        """
         self.new_state = None
         self.high_scores = high_scores
         self.level = level

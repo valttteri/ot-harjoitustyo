@@ -9,7 +9,13 @@ class Renderer:
     A class for rendering all game graphics
     """
 
-    def __init__(self, level):
+    def __init__(self, level: str):
+        """
+        Constructor for the class
+
+        Args:
+            level: the name of the current level
+        """
         pygame.init()
         self.level_map = get_level(level)
         self.display_width = len(self.level_map[0])
