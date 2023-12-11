@@ -17,8 +17,9 @@ Mato kasvaa sitä mukaa kun sille syöttää kirsikoita. Pelin voittaa, kun mato
 
 ## Käyttöohje
 
-1. Asenna riippuvuudet:
+1. Siirry snakegame-hakemistoon ja asenna riippuvuudet:
 ```bash
+cd snakegame
 poetry install
 ```
 
