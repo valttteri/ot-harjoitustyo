@@ -29,25 +29,25 @@ poetry shell
 
 3. Käynnistä sovellus
 ```bash
-poetry run invoke start
+invoke start
 ```
 
 ## Testaaminen
 
 Sovelluksen testit voi suorittaa komennolla
 ```bash
-poetry run invoke test
+invoke test
 ```
 
 Testikattavuusraportin saa luotua komennolla
 ```bash
-poetry run invoke coverage-report
+invoke coverage-report
 ```
 
 ## Pylint
 Koodin kirjoitusasun voi tarkastaa komennolla
 ```bash
-poetry run invoke lint
+invoke lint
 ```
 
 
