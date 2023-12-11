@@ -38,65 +38,52 @@ class TestLoop(unittest.TestCase):
     def test_starting_game(self):
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_1))
 
-        self.loop.start_keys_pressed()
+        self.loop.start_keys_pressed(self.events[-1])
 
         self.assertEqual(self.loop.state, "game_on")
 
     def test_access_high_scores_from_start_menu(self):
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_2))
 
-        self.loop.start_keys_pressed()
+        self.loop.start_keys_pressed(self.events[-1])
 
         self.assertEqual(self.loop.state, "high_score")
 
-    def test_quit_game_from_start_menu(self):
+    def test_quit(self):
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
-        self.loop.start_keys_pressed()
+        self.loop.keys_pressed()
 
         self.assertFalse(self.loop.running)
 
         self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
         self.loop.running = True
-        self.loop.start_keys_pressed()
+        self.loop.keys_pressed()
 
         self.assertFalse(self.loop.running)
 
     def test_close_pause_menu(self):
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_p))
 
-        self.loop.pause_keys_pressed()
+        self.loop.pause_keys_pressed(self.events[-1])
 
         self.assertEqual(self.loop.state, "game_on")
-
-    def test_quit_game_from_pause_menu(self):
-        self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
-
-        self.loop.pause_keys_pressed()
-        self.assertFalse(self.loop.running)
-
-    def test_quit_game_from_game_over_menu(self):
-        self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
-        self.loop.running = True
-
-        self.loop.game_over_keys_pressed()
-        self.assertFalse(self.loop.running)
 
     def test_start_new_game_from_game_over_menu(self):
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_1))
         self.loop.running = True
 
-        self.loop.game_over_keys_pressed()
+        self.loop.game_over_keys_pressed(self.events[-1])
         self.assertEqual(self.loop.state, "game_on")
 
     def test_pressing_keys_in_game_over_menu(self):
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_1))
-        self.loop.game_over_keys_pressed()
+        self.loop.game_over_keys_pressed(self.events[-1])
 
         self.assertEqual(self.loop.state, "game_on")
 
         self.loop.state = "game_over"
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_2))
-        self.loop.game_over_keys_pressed()
+        self.loop.game_over_keys_pressed(self.events[-1])
 
         self.assertEqual(self.loop.state, "start")
 
@@ -123,32 +110,15 @@ class TestLoop(unittest.TestCase):
 
         for key, value in events.items():
             self.events.append(value)
-            self.loop.game_keys_pressed()
+            self.loop.game_keys_pressed(self.events[-1])
             self.game_state_handler_mock.snake_direction_change.assert_called_with(key)
             self.events.pop()
 
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_p))
-        self.loop.game_keys_pressed()
+        self.loop.game_keys_pressed(self.events[-1])
         self.assertEqual(self.loop.state, "pause")
 
-    def test_quit_during_game(self):
-        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
-        self.loop.game_keys_pressed()
-        self.assertFalse(self.loop.running)
-
-        self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
-        self.loop.game_keys_pressed()
-        self.assertFalse(self.loop.running)
-
     def test_pressing_keys_at_high_score_screen(self):
-        self.events.append(StubEvent(pygame.QUIT, pygame.K_1))
-        self.loop.high_score_keys_pressed()
-        self.assertFalse(self.loop.running)
-
-        self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_ESCAPE))
-        self.loop.high_score_keys_pressed()
-        self.assertFalse(self.loop.running)
-
         self.events.append(StubEvent(pygame.KEYDOWN, pygame.K_1))
-        self.loop.high_score_keys_pressed()
+        self.loop.high_score_keys_pressed(self.events[-1])
         self.assertEqual(self.loop.state, "start")

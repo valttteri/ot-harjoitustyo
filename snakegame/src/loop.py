@@ -54,20 +54,7 @@ class Loop:
                 self.state = new_state
                 self.game_state_handler.reset_state()
 
-            match self.state:
-                case "start":
-                    self.start_keys_pressed()
-                case "pause":
-                    self.pause_keys_pressed()
-                case "game_over":
-                    self.game_over_keys_pressed()
-                case "victory":
-                    self.game_over_keys_pressed()
-                case "game_on":
-                    self.game_keys_pressed()
-                case "high_score":
-                    self.high_score_keys_pressed()
-
+            self.keys_pressed()
             self.events.update_display()
             self.clock.tick()
 
@@ -77,83 +64,85 @@ class Loop:
         self.game_state_handler.save_high_scores_to_database()
         self.events.quit()
 
-    def game_keys_pressed(self):
+    def keys_pressed(self):
+        for event in self.events.get_events():
+            if event.type == pygame.KEYDOWN:
+                match self.state:
+                    case "start":
+                        self.start_keys_pressed(event)
+                    case "pause":
+                        self.pause_keys_pressed(event)
+                    case "game_over":
+                        self.game_over_keys_pressed(event)
+                    case "victory":
+                        self.game_over_keys_pressed(event)
+                    case "game_on":
+                        self.game_keys_pressed(event)
+                    case "high_score":
+                        self.high_score_keys_pressed(event)
+            if (
+                event.type == self.user_events.time_to_move_snake()
+                and self.state == "game_on"
+            ):
+                self.game_state_handler.snake_move()
+            elif event.type == pygame.QUIT:
+                self.running = False
+
+    def game_keys_pressed(self, event):
         """
         User presses a key when in game
         """
-        for event in self.events.get_events():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.running = False
-                if event.key == pygame.K_UP:
-                    self.game_state_handler.snake_direction_change("up")
-                if event.key == pygame.K_DOWN:
-                    self.game_state_handler.snake_direction_change("down")
-                if event.key == pygame.K_LEFT:
-                    self.game_state_handler.snake_direction_change("left")
-                if event.key == pygame.K_RIGHT:
-                    self.game_state_handler.snake_direction_change("right")
-                if event.key == pygame.K_p:
-                    self.state = "pause"
-            if event.type == self.user_events.time_to_move_snake():
-                self.game_state_handler.snake_move()
 
-            elif event.type == pygame.QUIT:
-                self.running = False
+        if event.key == pygame.K_ESCAPE:
+            self.running = False
+        if event.key == pygame.K_UP:
+            self.game_state_handler.snake_direction_change("up")
+        if event.key == pygame.K_DOWN:
+            self.game_state_handler.snake_direction_change("down")
+        if event.key == pygame.K_LEFT:
+            self.game_state_handler.snake_direction_change("left")
+        if event.key == pygame.K_RIGHT:
+            self.game_state_handler.snake_direction_change("right")
+        if event.key == pygame.K_p:
+            self.state = "pause"
 
-    def start_keys_pressed(self):
+    def start_keys_pressed(self, event):
         """
         User presses a key when in main menu
         """
-        for event in self.events.get_events():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.running = False
-                if event.key == pygame.K_1:
-                    self.state = "game_on"
-                if event.key == pygame.K_2:
-                    self.state = "high_score"
-            elif event.type == pygame.QUIT:
-                self.running = False
+        if event.key == pygame.K_ESCAPE:
+            self.running = False
+        if event.key == pygame.K_1:
+            self.state = "game_on"
+        if event.key == pygame.K_2:
+            self.state = "high_score"
 
-    def pause_keys_pressed(self):
+    def pause_keys_pressed(self, event):
         """
         User presses a key when game is paused
         """
-        for event in self.events.get_events():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.state = "start"
-                    self.game_state_handler.reset_score()
-                if event.key == pygame.K_p:
-                    self.state = "game_on"
-            elif event.type == pygame.QUIT:
-                self.running = False
+        if event.key == pygame.K_ESCAPE:
+            self.state = "start"
+            self.game_state_handler.reset_score()
+        if event.key == pygame.K_p:
+            self.state = "game_on"
 
-    def game_over_keys_pressed(self):
+    def game_over_keys_pressed(self, event):
         """
         User presses a key when game is over
         """
-        for event in self.events.get_events():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.state = "start"
-                if event.key == pygame.K_1:
-                    self.game_state_handler.reset_score()
-                    self.state = "game_on"
-                if event.key == pygame.K_2:
-                    self.game_state_handler.save_final_score()
-                    self.state = "start"
-            elif event.type == pygame.QUIT:
-                self.running = False
+        if event.key == pygame.K_ESCAPE:
+            self.state = "start"
+        if event.key == pygame.K_1:
+            self.game_state_handler.reset_score()
+            self.state = "game_on"
+        if event.key == pygame.K_2:
+            self.game_state_handler.save_final_score()
+            self.state = "start"
 
-    def high_score_keys_pressed(self):
+    def high_score_keys_pressed(self, event):
         """
         User presses a key when looking at high scores
         """
-        for event in self.events.get_events():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.state = "start"
-            elif event.type == pygame.QUIT:
-                self.running = False
+        if event.key == pygame.K_ESCAPE:
+            self.state = "start"
