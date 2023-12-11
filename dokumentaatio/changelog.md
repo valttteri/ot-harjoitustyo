@@ -61,3 +61,14 @@
 #### Testit
 - Pelisilmukan testikattavuutta laajennettu
 - GameStateHandlerin testaaminen aloitettu
+
+## Viikko 6
+#### Komponentit
+- Database-luokka, joka kommunikoi SQLite-tietokannan kanssa
+
+#### Sovelluslogiikka
+- Huipputulokset tallennetaan SQLite-tietokantaan
+
+#### Testit
+- Testikattavuutta kasvatettu ~40 prosentista ~75 prosenttiin
+- Levelhandlerille on nyt testejä
