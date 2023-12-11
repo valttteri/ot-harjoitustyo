@@ -28,7 +28,7 @@ Mitä pidemmäksi mato kasvaa, sitä enemmän pelaaja saa pisteitä. Peli päät
   - Sivu, jolle on listattu pelissä saavutetut pisteet parhausjärjestyksessä &#x2714;
   - Tulokset tallennetaan SQLite-tietokantaan &#x2714;
 - Ulkoasu
-  - Pelin ulkoasun näyttää järkevältä
+  - Pelin ulkoasun näyttää järkevältä &#x2714;
 
 ### Jatkokehitysideoita
 Perusversion valmistuttua peliin voi lisätä seuraavia ominaisuuksia
