@@ -17,4 +17,5 @@
 | 6.12. | 4h   | testit, SQLite-tietokannan integrointi |
 | 7.12. | 1h   | docstringit, pylint-virheiden korjaaminen|
 | 9.12. | 3h   | pelin ulkoasu, refaktorointi |
-| yht.  | 45h   |
+| 11.12. | 4h   | koodin rakenteen parantelu |
+| yht.  | 49h   |
