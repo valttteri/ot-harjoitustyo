@@ -9,7 +9,7 @@ class Renderer:
     A class for rendering all game graphics
     """
 
-    def __init__(self, level: str):
+    def __init__(self, level: str, image_loader: object):
         """
         Constructor for the class
 
@@ -17,6 +17,7 @@ class Renderer:
             level: the name of the current level
         """
         pygame.init()
+        self.image_loader = image_loader
         self.level_map = get_level(level)
         self.display_width = len(self.level_map[0])
         self.display_height = len(self.level_map)
@@ -46,9 +47,7 @@ class Renderer:
         """
         Renders a particular image on screen
         """
-        image = pygame.transform.scale(
-            pygame.image.load(f"src/images/{name}.png").convert_alpha(), (30, 30)
-        )
+        image = self.image_loader.load_image(name)
         self.display.blit(image, (x_pos, y_pos))
 
     def render_snakes_body(self, part, previous_part, next_part):
@@ -57,40 +56,40 @@ class Renderer:
         """
         # horizontal and vertical parts
         if previous_part.y == part.y == next_part.y:
-            self.display_graphics("snake_body_hz", part.x, part.y)
+            self.display_graphics("snake_body_hz.png", part.x, part.y)
         elif previous_part.x == part.x == next_part.x:
-            self.display_graphics("snake_body_vert", part.x, part.y)
+            self.display_graphics("snake_body_vert.png", part.x, part.y)
 
         # when snake turns
         elif part.y == min(previous_part.y, next_part.y) and part.x == min(
             previous_part.x, next_part.x
         ):
-            self.display_graphics("snake_turn_bottom_right", part.x, part.y)
+            self.display_graphics("snake_turn_bottom_right.png", part.x, part.y)
         elif part.y == max(previous_part.y, next_part.y) and part.x == max(
             previous_part.x, next_part.x
         ):
-            self.display_graphics("snake_turn_top_left", part.x, part.y)
+            self.display_graphics("snake_turn_top_left.png", part.x, part.y)
         elif part.y == max(previous_part.y, next_part.y) and part.x == min(
             previous_part.x, next_part.x
         ):
-            self.display_graphics("snake_turn_top_right", part.x, part.y)
+            self.display_graphics("snake_turn_top_right.png", part.x, part.y)
         elif part.y == min(previous_part.y, next_part.y) and part.x == max(
             previous_part.x, next_part.x
         ):
-            self.display_graphics("snake_turn_bottom_left", part.x, part.y)
+            self.display_graphics("snake_turn_bottom_left.png", part.x, part.y)
 
     def render_snakes_tail(self, tail, part_before_tail):
         """
         Render the snake's tail
         """
         if part_before_tail.y < tail.y:
-            self.display_graphics("snake_tail_down", tail.x, tail.y)
+            self.display_graphics("snake_tail_down.png", tail.x, tail.y)
         if part_before_tail.y > tail.y:
-            self.display_graphics("snake_tail_up", tail.x, tail.y)
+            self.display_graphics("snake_tail_up.png", tail.x, tail.y)
         if part_before_tail.x > tail.x:
-            self.display_graphics("snake_tail_left", tail.x, tail.y)
+            self.display_graphics("snake_tail_left.png", tail.x, tail.y)
         if part_before_tail.x < tail.x:
-            self.display_graphics("snake_tail_right", tail.x, tail.y)
+            self.display_graphics("snake_tail_right.png", tail.x, tail.y)
 
     def render_snakes_head(self, head, direction):
         """
@@ -98,13 +97,13 @@ class Renderer:
         """
         match (direction["x"], direction["y"]):
             case (0, -1):
-                self.display_graphics("snake_head_up", head.x, head.y)
+                self.display_graphics("snake_head_up.png", head.x, head.y)
             case (0, 1):
-                self.display_graphics("snake_head_down", head.x, head.y)
+                self.display_graphics("snake_head_down.png", head.x, head.y)
             case (-1, 0):
-                self.display_graphics("snake_head_left", head.x, head.y)
+                self.display_graphics("snake_head_left.png", head.x, head.y)
             case (1, 0):
-                self.display_graphics("snake_head_right", head.x, head.y)
+                self.display_graphics("snake_head_right.png", head.x, head.y)
 
     def display_score(self, score):
         """

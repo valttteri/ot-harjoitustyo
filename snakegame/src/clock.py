@@ -5,6 +5,7 @@ class PygameClock:
     """
     Class for managing the pygame clock
     """
+
     def __init__(self, fps):
         """
         Constructor for the class
@@ -20,4 +21,3 @@ class PygameClock:
         Tick the clock
         """
         self.clock.tick(self.fps)
-        

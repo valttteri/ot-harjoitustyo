@@ -21,7 +21,7 @@ class SnakeGame:
         self.game_state_handler = GameStateHandler(
             [],
             "level_one",
-            Renderer("level_one"),
+            Renderer("level_one", ImageLoader()),
             self.level_handler,
             self.database_handler,
         )
