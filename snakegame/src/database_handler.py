@@ -13,14 +13,14 @@ class Database:
         Args:
             location: the location of the database
         """
-        self.location = location
+        self._location = location
         self.initialize_database()
 
     def initialize_database(self):
         """
         Set up the database
         """
-        connection = sqlite3.connect(self.location)
+        connection = sqlite3.connect(self._location)
         cursor = connection.cursor()
 
         cursor.execute(
@@ -40,7 +40,7 @@ class Database:
         """
         Empty each table in the database
         """
-        connection = sqlite3.connect(self.location)
+        connection = sqlite3.connect(self._location)
         cursor = connection.cursor()
 
         cursor.execute("DROP TABLE IF EXISTS scores")
@@ -55,7 +55,7 @@ class Database:
         Args:
             high_score: the HighScore object to be added
         """
-        connection = sqlite3.connect(self.location)
+        connection = sqlite3.connect(self._location)
         cursor = connection.cursor()
 
         cursor.execute(
@@ -75,7 +75,7 @@ class Database:
         Returns:
             score_list: a list containing HighScore objects
         """
-        connection = sqlite3.connect(self.location)
+        connection = sqlite3.connect(self._location)
         cursor = connection.cursor()
 
         cursor.execute("SELECT score, time from scores")
@@ -101,7 +101,7 @@ class Database:
         Args:
             high_scores: a list of HighScore objects
         """
-        connection = sqlite3.connect(self.location)
+        connection = sqlite3.connect(self._location)
         self.clear_database()
         self.initialize_database()
 

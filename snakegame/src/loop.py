@@ -27,13 +27,13 @@ class Loop:
             user_events: returns the pygame userevents
         """
         self.state = state
-        self.level = level
+        self._level = level
 
-        self.game_state_handler = game_state_handler
-        self.events = events
-        self.clock = clock
+        self._game_state_handler = game_state_handler
+        self._events = events
+        self._clock = clock
 
-        self.user_events = user_events
+        self._user_events = user_events
 
         self.running = True
 
@@ -45,27 +45,27 @@ class Loop:
             stop: False by default. If true, then the game loop stops after the first loop.
                 This happens during test runs
         """
-        self.game_state_handler.get_high_scores()
+        self._game_state_handler.get_high_scores()
         while self.running:
-            self.game_state_handler.execute_state(self.state)
+            self._game_state_handler.execute_state(self.state)
 
-            new_state = self.game_state_handler.change_state()
+            new_state = self._game_state_handler.change_state()
             if new_state:
                 self.state = new_state
-                self.game_state_handler.reset_state()
+                self._game_state_handler.reset_state()
 
             self.keys_pressed()
-            self.events.update_display()
-            self.clock.tick()
+            self._events.update_display()
+            self._clock.tick()
 
             if stop:
                 break
 
-        self.game_state_handler.save_high_scores_to_database()
-        self.events.quit()
+        self._game_state_handler.save_high_scores_to_database()
+        self._events.quit()
 
     def keys_pressed(self):
-        for event in self.events.get_events():
+        for event in self._events.get_events():
             if event.type == pygame.KEYDOWN:
                 match self.state:
                     case "start":
@@ -81,10 +81,10 @@ class Loop:
                     case "high_score":
                         self.high_score_keys_pressed(event)
             if (
-                event.type == self.user_events.time_to_move_snake()
+                event.type == self._user_events.time_to_move_snake()
                 and self.state == "game_on"
             ):
-                self.game_state_handler.snake_move()
+                self._game_state_handler.snake_move()
             elif event.type == pygame.QUIT:
                 self.running = False
 
@@ -96,13 +96,13 @@ class Loop:
         if event.key == pygame.K_ESCAPE:
             self.running = False
         if event.key == pygame.K_UP:
-            self.game_state_handler.snake_direction_change("up")
+            self._game_state_handler.snake_direction_change("up")
         if event.key == pygame.K_DOWN:
-            self.game_state_handler.snake_direction_change("down")
+            self._game_state_handler.snake_direction_change("down")
         if event.key == pygame.K_LEFT:
-            self.game_state_handler.snake_direction_change("left")
+            self._game_state_handler.snake_direction_change("left")
         if event.key == pygame.K_RIGHT:
-            self.game_state_handler.snake_direction_change("right")
+            self._game_state_handler.snake_direction_change("right")
         if event.key == pygame.K_p:
             self.state = "pause"
 
@@ -123,7 +123,7 @@ class Loop:
         """
         if event.key == pygame.K_ESCAPE:
             self.state = "start"
-            self.game_state_handler.reset_score()
+            self._game_state_handler.reset_score()
         if event.key == pygame.K_p:
             self.state = "game_on"
 
@@ -134,10 +134,10 @@ class Loop:
         if event.key == pygame.K_ESCAPE:
             self.state = "start"
         if event.key == pygame.K_1:
-            self.game_state_handler.reset_score()
+            self._game_state_handler.reset_score()
             self.state = "game_on"
         if event.key == pygame.K_2:
-            self.game_state_handler.save_final_score()
+            self._game_state_handler.save_final_score()
             self.state = "start"
 
     def high_score_keys_pressed(self, event):

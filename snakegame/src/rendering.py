@@ -18,13 +18,13 @@ class Renderer:
         """
         pygame.init()
         self.image_loader = image_loader
-        self.level_map = get_level(level)
-        self.display_width = len(self.level_map[0])
-        self.display_height = len(self.level_map)
-        self.cell_size = 30
-        self.high_scores = []
+        self._level_map = get_level(level)
+        self._display_width = len(self._level_map[0])
+        self._display_height = len(self._level_map)
+        self._cell_size = 30
+        self._high_scores = []
         self.display = pygame.display.set_mode(
-            (self.cell_size * self.display_width, self.cell_size * self.display_height)
+            (self._cell_size * self._display_width, self._cell_size * self._display_height)
         )
         pygame.display.set_caption("Snake 2023")
 
@@ -33,9 +33,9 @@ class Renderer:
         Renders a screen
         """
         if name == "high_score_screen":
-            HighScoreScreen(self.display, self.level_map).draw(high_scores)
+            HighScoreScreen(self.display, self._level_map).draw(high_scores)
         else:
-            DefaultScreen(self.display, self.level_map).draw(name)
+            DefaultScreen(self.display, self._level_map).draw(name)
 
     def render_sprites(self, sprites):
         """
@@ -109,8 +109,8 @@ class Renderer:
         """
         Renders the player's score
         """
-        x_pos = 24 * self.cell_size
-        y_pos = 1.5 * self.cell_size
+        x_pos = 24 * self._cell_size
+        y_pos = 1.5 * self._cell_size
         score_font = pygame.font.SysFont("arialblack", 24)
         text = score_font.render(f"Score: {score}", True, (0, 0, 0))
         self.display.blit(text, (x_pos, y_pos))

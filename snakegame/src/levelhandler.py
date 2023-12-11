@@ -22,12 +22,12 @@ class LevelHandler:
             image_loader: a tool for loading an image
             score: the player's score for the game
         """
-        self.level = level
-        self.level_map = get_level(self.level)
-        self.display_width = len(self.level_map[0])
-        self.display_height = len(self.level_map)
-        self.cell_size = cell_size
-        self.image_loader = image_loader
+        self._level = level
+        self._level_map = get_level(self._level)
+        self._display_width = len(self._level_map[0])
+        self._display_height = len(self._level_map)
+        self._cell_size = cell_size
+        self._image_loader = image_loader
 
         self.score = score
         self.snake = None
@@ -43,30 +43,30 @@ class LevelHandler:
         Returns:
             self.sprite_groups: all sprite objects for the level
         """
-        for y in range(self.display_height):
-            for x in range(self.display_width):
-                cell = self.level_map[y][x]
-                x_pos = self.cell_size * x
-                y_pos = self.cell_size * y
+        for y in range(self._display_height):
+            for x in range(self._display_width):
+                cell = self._level_map[y][x]
+                x_pos = self._cell_size * x
+                y_pos = self._cell_size * y
                 match cell:
                     case 0:
-                        self.grass.add(Grass(x_pos, y_pos, self.image_loader))
+                        self.grass.add(Grass(x_pos, y_pos, self._image_loader))
                     case 1:
-                        self.grass.add(Grass(x_pos, y_pos, self.image_loader))
-                        self.walls.add(Wall(self.image_loader, x_pos, y_pos))
+                        self.grass.add(Grass(x_pos, y_pos, self._image_loader))
+                        self.walls.add(Wall(self._image_loader, x_pos, y_pos))
                     case 2:
-                        self.grass.add(Grass(x_pos, y_pos, self.image_loader))
+                        self.grass.add(Grass(x_pos, y_pos, self._image_loader))
                         self.food.add(
-                            Food(x_pos, y_pos, self.cell_size, self.image_loader)
+                            Food(x_pos, y_pos, self._cell_size, self._image_loader)
                         )
                     case 3:
-                        self.grass.add(Grass(x_pos, y_pos, self.image_loader))
+                        self.grass.add(Grass(x_pos, y_pos, self._image_loader))
                         self.snake = Snake(
                             x,
                             y,
-                            self.cell_size,
-                            self.display_width,
-                            self.display_height,
+                            self._cell_size,
+                            self._display_width,
+                            self._display_height,
                         )
 
         self.sprite_groups.add(self.grass, self.walls, self.food)
@@ -171,15 +171,15 @@ class LevelHandler:
             food: the food object that was eaten
         """
         while True:
-            x_pos = randint(1, 29) * self.cell_size
-            y_pos = randint(1, 19) * self.cell_size
+            x_pos = randint(1, 29) * self._cell_size
+            y_pos = randint(1, 19) * self._cell_size
             new_position = pygame.Rect(
                 x_pos,
                 y_pos,
-                self.cell_size,
-                self.cell_size,
+                self._cell_size,
+                self._cell_size,
             )
-            new_food = Food(x_pos, y_pos, self.cell_size, self.image_loader)
+            new_food = Food(x_pos, y_pos, self._cell_size, self._image_loader)
 
             if new_position.collidelist(self.snake.body) != -1:
                 continue

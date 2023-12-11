@@ -16,25 +16,25 @@ class SnakeGame:
     """
 
     def __init__(self):
-        self.database_handler = Database("score_data.db")
-        self.level_handler = LevelHandler("level_one", 30, ImageLoader(), Score(0))
-        self.game_state_handler = GameStateHandler(
+        self._database_handler = Database("score_data.db")
+        self._level_handler = LevelHandler("level_one", 30, ImageLoader(), Score(0))
+        self._game_state_handler = GameStateHandler(
             [],
             "level_one",
             Renderer("level_one", ImageLoader()),
-            self.level_handler,
-            self.database_handler,
+            self._level_handler,
+            self._database_handler,
         )
 
-        self.infinite_loop = Loop(
+        self._infinite_loop = Loop(
             "start",
             "level_one",
             PygameEvents(),
-            self.game_state_handler,
+            self._game_state_handler,
             PygameClock(60),
             UserEvents(),
         )
-        self.infinite_loop.execute()
+        self._infinite_loop.execute()
 
 
 if __name__ == "__main__":

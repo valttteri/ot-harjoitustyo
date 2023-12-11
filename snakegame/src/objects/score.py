@@ -9,22 +9,22 @@ class Score:
         Args:
             score: the initial score
         """
-        self.score = score
+        self._score = score
 
     def increase(self):
         """
         Increase score by one
         """
-        self.score += 1
+        self._score += 1
 
     def reset(self):
         """
         Set score back to zero
         """
-        self.score = 0
+        self._score = 0
 
     def show(self):
         """
         Returns the current score
         """
-        return self.score
+        return self._score

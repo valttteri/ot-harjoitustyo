@@ -3,11 +3,11 @@ import pygame
 
 class DefaultScreen:
     def __init__(self, display, level_map):
-        self.display = display
-        self.height = len(level_map)
-        self.width = len(level_map[0])
-        self.font = pygame.font.SysFont("arialblack", 45)
-        self.small_font = pygame.font.SysFont("arialblack", 28)
+        self._display = display
+        self._height = len(level_map)
+        self._width = len(level_map[0])
+        self._font = pygame.font.SysFont("arialblack", 45)
+        self._small_font = pygame.font.SysFont("arialblack", 28)
 
     def get_colour(self, screen_type):
         colours = {
@@ -39,29 +39,29 @@ class DefaultScreen:
 
     def draw(self, screen_type):
         text_center = [
-            (self.width * 30) // 2,
-            (self.height * 30) // 2 - 100,
+            (self._width * 30) // 2,
+            (self._height * 30) // 2 - 100,
         ]
-        self.display.fill(self.get_colour(screen_type))
+        self._display.fill(self.get_colour(screen_type))
         text_topleft = [0, 0]
 
         for i, message in enumerate(self.get_messages(screen_type)):
             if i == 0:
-                text = self.font.render(message, True, (0, 0, 0))
+                text = self._font.render(message, True, (0, 0, 0))
                 text_rect = text.get_rect(center=text_center)
-                self.display.blit(text, text_rect)
+                self._display.blit(text, text_rect)
                 text_center[1] += 60
                 continue
 
             if i == 1:
-                text = self.small_font.render(message, True, (0, 0, 0))
+                text = self._small_font.render(message, True, (0, 0, 0))
                 text_rect = text.get_rect(center=text_center)
                 text_topleft = [text_rect.topleft[0], text_rect.topleft[1]]
-                self.display.blit(text, text_rect)
+                self._display.blit(text, text_rect)
                 text_topleft[1] += 30
 
             else:
-                text = self.small_font.render(message, True, (0, 0, 0))
+                text = self._small_font.render(message, True, (0, 0, 0))
                 text_rect = text.get_rect(topleft=text_topleft)
-                self.display.blit(text, text_rect)
+                self._display.blit(text, text_rect)
                 text_topleft[1] += 30

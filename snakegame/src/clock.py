@@ -13,11 +13,11 @@ class PygameClock:
         Args:
             fps: the game's framerate
         """
-        self.clock = pygame.time.Clock()
-        self.fps = fps
+        self._clock = pygame.time.Clock()
+        self._fps = fps
 
     def tick(self):
         """
         Tick the clock
         """
-        self.clock.tick(self.fps)
+        self._clock.tick(self._fps)

@@ -16,8 +16,8 @@ class Food(pygame.sprite.Sprite):
             image_loader: tool for loading an image
         """
         super().__init__()
-        self.height = cell_size
-        self.width = cell_size
+        self._height = cell_size
+        self._width = cell_size
         self.image = image_loader.load_image("cherry.png")
         self.rect = self.image.get_rect()
         self.rect.x = x_pos
