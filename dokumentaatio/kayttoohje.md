@@ -2,7 +2,7 @@
 
 ## Ohjelman asentaminen
 
-1. Lataa projektin uusin release
+1. Lataa projektin uusin [release](https://github.com/valttteri/ot-harjoitustyo/releases)
 
 2. Asenna ohjelman riippuvuudet
 ```bash
