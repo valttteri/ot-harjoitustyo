@@ -18,4 +18,5 @@
 | 7.12. | 1h   | docstringit, pylint-virheiden korjaaminen|
 | 9.12. | 3h   | pelin ulkoasu, refaktorointi |
 | 11.12. | 4h   | koodin rakenteen parantelu |
-| yht.  | 49h   |
+| 11.12. | 3h   | dokumentaatio |
+| yht.  | 51h   |
