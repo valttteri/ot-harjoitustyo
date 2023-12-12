@@ -7,7 +7,7 @@ from clock import PygameClock
 from user_events import UserEvents
 from image_loader import ImageLoader
 from objects.score import Score
-from database_handler import Database
+from database_handler import DatabaseHandler
 
 
 class SnakeGame:
@@ -16,7 +16,7 @@ class SnakeGame:
     """
 
     def __init__(self):
-        self._database_handler = Database("score_data.db")
+        self._database_handler = DatabaseHandler("score_data.db")
         self._level_handler = LevelHandler("level_one", 30, ImageLoader(), Score(0))
         self._game_state_handler = GameStateHandler(
             [],

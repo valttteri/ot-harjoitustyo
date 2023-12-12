@@ -2,7 +2,7 @@ import sqlite3
 from high_score import HighScore
 
 
-class Database:
+class DatabaseHandler:
     """
     Class for managing the SQLite database
     """
