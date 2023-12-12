@@ -15,5 +15,41 @@ Mato kasvaa sitä mukaa kun sille syöttää kirsikoita. Pelin voittaa, kun mato
 
 [Release](https://github.com/valttteri/ot-harjoitustyo/releases/tag/v1.0.0)
 
+## Asentaminen
+
+1. Aloita asentamalla repositorio laitteellesi. Siirry snakegame-hakemistoon ja asenna riippuvuudet:
+```bash
+cd snakegame
+poetry install
+```
+
+2. Käynnistä virtuaaliympäristö
+```bash
+poetry shell
+```
+
+3. Käynnistä sovellus
+```bash
+invoke start
+```
+
+## Testaaminen
+
+Sovelluksen testit voi suorittaa komennolla
+```bash
+invoke test
+```
+
+Testikattavuusraportin saa luotua komennolla
+```bash
+invoke coverage-report
+```
+
+## Pylint
+Koodin kirjoitusasun voi tarkastaa komennolla
+```bash
+invoke lint
+```
+
 
 
