@@ -5,15 +5,11 @@ Mato kasvaa sitä mukaa kun sille syöttää kirsikoita. Pelin voittaa, kun mato
 
 ## Dokumentaatio
 
-[Määrittelydokumentti](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/maarittelydokumentti.md)
-
-[Tuntikirjanpito](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
-
-[Changelog](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
-
-[Arkkitehtuuri](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
-
-[Release](https://github.com/valttteri/ot-harjoitustyo/releases/tag/v1.0.0)
+- [Määrittelydokumentti](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/maarittelydokumentti.md)
+- [Tuntikirjanpito](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
+- [Changelog](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
+- [Arkkitehtuuri](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
+- [Releases](https://github.com/valttteri/ot-harjoitustyo/releases)
 
 ## Asentaminen
 
