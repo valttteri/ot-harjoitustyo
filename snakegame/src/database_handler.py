@@ -14,9 +14,9 @@ class DatabaseHandler:
             location: the location of the database
         """
         self._location = location
-        self.initialize_database()
+        self._initialize_database()
 
-    def initialize_database(self):
+    def _initialize_database(self):
         """
         Set up the database
         """
@@ -36,7 +36,7 @@ class DatabaseHandler:
         connection.commit()
         connection.close()
 
-    def clear_database(self):
+    def _clear_database(self):
         """
         Empty each table in the database
         """
@@ -48,7 +48,7 @@ class DatabaseHandler:
         connection.commit()
         connection.close()
 
-    def add_high_score(self, high_score: object):
+    def _add_high_score(self, high_score: object):
         """
         Adds a new high score object to the database
 
@@ -102,11 +102,11 @@ class DatabaseHandler:
             high_scores: a list of HighScore objects
         """
         connection = sqlite3.connect(self._location)
-        self.clear_database()
-        self.initialize_database()
+        self._clear_database()
+        self._initialize_database()
 
         for high_score in high_scores:
-            self.add_high_score(high_score)
+            self._add_high_score(high_score)
 
         connection.commit()
         connection.close()

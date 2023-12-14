@@ -46,7 +46,7 @@ class GameStateHandler:
             case "game_over":
                 self._renderer.render_screen("game_over")
             case "game_on":
-                self.get_game_events()
+                self._get_game_events()
             case "victory":
                 self._renderer.render_screen("victory")
             case "high_score":
@@ -71,7 +71,7 @@ class GameStateHandler:
         """
         self._level_handler.reset_level_score()
 
-    def get_game_events(self):
+    def _get_game_events(self):
         """
         Get events that happen while the game is running. Change the game state
         when needed and call functions for rendering everything
