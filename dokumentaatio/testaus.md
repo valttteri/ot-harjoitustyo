@@ -14,6 +14,18 @@ kolmea eri stubia testien suorituksen aikana.
 `LevelHandler`-luokan testit suorittaa testiluokka `TestLevelHandler`. Testeissä käytetään yhtä stubia joka on `StubImageLoader`. Testiluokka varmistaa, että `LevelHandler` kommunikoi pelikentän kanssa 
 niin kuin sen pitäisi.
 
+## Testien suorittaminen
+
+Sovelluksen testit voi suorittaa komennolla
+```bash
+invoke test
+```
+
+Testikattavuusraportin saa luotua komennolla
+```bash
+invoke coverage-report
+```
+
 ## Testikattavuus
 
 Tiedostoa `database_handler.py` ei ole testattu ollenkaan. Sen lisäksi testaamatta ovat jääneet `levelhandler.py`-tiedoston `relocate_food()`-funktio
