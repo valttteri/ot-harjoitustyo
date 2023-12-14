@@ -19,4 +19,5 @@
 | 9.12. | 3h   | pelin ulkoasu, refaktorointi |
 | 11.12. | 4h   | koodin rakenteen parantelu |
 | 11.12. | 3h   | dokumentaatio |
-| yht.  | 51h   |
+| 14.12. | 2h   | dokumentaatio |
+| yht.  | 53h   |
