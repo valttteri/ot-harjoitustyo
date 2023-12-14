@@ -32,8 +32,13 @@ class DefaultScreen:
                 "2 : High Scores",
                 "Esc : Exit",
             ],
-            "victory": ["You win!", "1: New game", "2 : Submit score", "Esc : Main menu"],
-            "pause": ["Paused", "p : Continue", "Esc: Main menu"]
+            "victory": [
+                "You win!",
+                "1: New game",
+                "2 : Submit score",
+                "Esc : Main menu",
+            ],
+            "pause": ["Paused", "p : Continue", "Esc: Main menu"],
         }
         return messages[screen_type]
 
@@ -53,15 +58,13 @@ class DefaultScreen:
                 text_center[1] += 60
                 continue
 
+            text = self._small_font.render(message, True, (0, 0, 0))
+
             if i == 1:
-                text = self._small_font.render(message, True, (0, 0, 0))
                 text_rect = text.get_rect(center=text_center)
                 text_topleft = [text_rect.topleft[0], text_rect.topleft[1]]
-                self._display.blit(text, text_rect)
-                text_topleft[1] += 30
-
             else:
-                text = self._small_font.render(message, True, (0, 0, 0))
                 text_rect = text.get_rect(topleft=text_topleft)
-                self._display.blit(text, text_rect)
-                text_topleft[1] += 30
+
+            self._display.blit(text, text_rect)
+            text_topleft[1] += 30

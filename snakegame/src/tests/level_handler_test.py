@@ -22,7 +22,7 @@ class TestLevelHandler(unittest.TestCase):
 
         self.level_handler.reset_level_score()
         self.assertEqual(self.level_handler.level_score(), 0)
-    
+
     def test_victory(self):
         self.level_handler.increase_score()
         self.assertFalse(self.level_handler.victory())
