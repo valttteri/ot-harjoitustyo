@@ -48,3 +48,7 @@ Koodin kirjoitusasun voi tarkastaa komennolla
 ```bash
 invoke lint
 ```
+
+## Selvitys ChatGPT:n ja muiden kielimalleihin perustuvien välineiden käytöstä
+
+Projektin tekemiseen ei ole käytetty ChatGPT:tä tai muita vastaavia apuvälineitä.
