@@ -10,6 +10,7 @@ Mato kasvaa sitä mukaa kun sille syöttää kirsikoita. Pelin voittaa, kun mato
 - [Tuntikirjanpito](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
 - [Changelog](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/changelog.md)
 - [Arkkitehtuuri](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
+- [Testaus](https://github.com/valttteri/ot-harjoitustyo/blob/main/dokumentaatio/testaus.md)
 - [Releases](https://github.com/valttteri/ot-harjoitustyo/releases)
 
 ## Asentaminen
@@ -47,6 +48,3 @@ Koodin kirjoitusasun voi tarkastaa komennolla
 ```bash
 invoke lint
 ```
-
-
-
